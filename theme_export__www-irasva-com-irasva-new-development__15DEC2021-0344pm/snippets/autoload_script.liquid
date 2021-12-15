@@ -1,0 +1,37 @@
+<script>
+    var ADMIN_URL = "https://www.shopifyapp.irasva.com/api/";
+    
+    $(document).ready(function(){
+        var goldPrice = "{{ cart.attributes.gold_price }}";
+        $.ajax({
+            type: 'GET',
+            url: ADMIN_URL + "get-gold-price",
+            success: function (respObj) {
+                var currentGoldPrice = respObj.data.gold_price;
+                new_attributes = {};
+                new_attributes['gold_carate_percentage'] = respObj.data.gold_carate_percentage;
+                new_attributes['gold_price'] = currentGoldPrice;
+                
+                if(goldPrice != currentGoldPrice){
+                    updateCartAttribute(new_attributes);
+                }
+            },
+        });
+    });
+
+    function updateCartAttribute(data){
+        $.ajax({
+            type: 'POST',
+            url: "/cart/update.js",
+            data: { attributes: data },
+            dataType: "json",
+            async: false,
+            cache: false,
+            beforeSend: function () {
+            },
+            success: function (response) {
+                console.log('cart gold price updated');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,43 @@
+<!-- Footer scripts -->
+<script src="{{ 'vendor.min.js' | asset_url }}" defer></script>
+<script src="{{ 'api.jquery.js' | shopify_asset_url }}" async></script>
+<script src="{{ 'option_selection.js' | shopify_asset_url }}" async></script>
+{%  include 'new-currency' %}
+<script src="{{ 'jquery.sticky.js' | asset_url }}" defer></script>
+<!-- <script src="{{ 'ella.min.js' | asset_url }}"></script> -->
+<script src="{{ 'halo.js' | asset_url }}"></script>
+{% if template contains 'collection' %}
+<script>
+  $(document).ready(function(){
+    $('.dropdown-cat a').each(function(){
+      if($(this).hasClass('active')) {
+      	$(this).parents('li').addClass('open');
+      }
+    });
+  })
+</script>
+{% endif %}
+<script>
+  var windowWidth = $(window).width();
+  if(windowWidth<1024){
+    const shareButton = document.querySelector('.share_toolbox');
+//     const shareDialog = document.querySelector('.social-sharing');
+  //   const closeButton = document.querySelector('.close-button');
+
+    shareButton.addEventListener('click', event => {
+      if (navigator.share) { 
+          navigator.share({
+            title: 'Irasva',
+            text:"{{ product.title }}",
+            url: '{{ shop.url }}{{ product.url }}'
+          }).then(() => {
+          console.log('Thanks for sharing!');
+        }).catch(console.error);
+      } else {
+      }
+    });
+  }
+//   closeButton.addEventListener('click', event => {
+//     shareDialog.classList.remove('is-open');
+//   });
+</script>

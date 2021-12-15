@@ -1,0 +1,29 @@
+{% if settings.display_popup_newsletter %}
+<div class="wrapper-newsletter halo-modal" data-newsletter data-delay="{{settings.popup_newsletter_delay | times:1000}}">
+    <div class="modal-overlay">
+        <div class="halo-modal-content">
+            <a class="close close-window" title="{{ 'cart.ajax_cart.close' | t }}">
+                {% include 'icon-close' %}
+            </a>
+            
+            <div class="halo-modal-body">
+              <div class="column-left">
+                {%- assign img_url = settings.newsletter | img_url: '2400x' -%}
+                {%- assign img_url_mob = settings.newsletter_mob | img_url: '2400x' -%}
+
+                {% if settings.newsletter != blank %}
+                <img data-src="{{ img_url }}" src="{{ img_url }}" class="lazyautosizes lazyloaded desktop-banner" data-sizes="auto">
+                <img data-src="{{ img_url_mob }}" src="{{ img_url_mob }}" class="lazyautosizes lazyloaded mobile-banner" data-sizes="auto" >
+                {% else %}
+                <div class="not_img">
+                  360 x 360px
+                </div>   
+                {% endif %}
+                <a href="{{ settings.buttonUrl }}" class="virtual-button">
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

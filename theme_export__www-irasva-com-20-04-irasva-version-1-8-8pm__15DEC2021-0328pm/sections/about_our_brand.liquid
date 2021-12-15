@@ -1,0 +1,166 @@
+<div class="image-with-video-overlay">
+  <div class="container">
+  {% if section.settings.spotlight_block_title != blank %}
+  <div class="widget-title{% if section.settings.title_style == 'style_2' %} not-before{% endif %}{% unless section.settings.spotlight_block_des != blank %} no-des{% endunless %}">   
+    <h3 class="box-title">
+      <span class="title"> 
+        <span>
+        {{ section.settings.spotlight_block_title }}
+      </span>
+      </span>
+    </h3>
+    {% if section.settings.spotlight_block_des != blank %}
+    <p class="banner-des">
+      {{ section.settings.spotlight_block_des }}
+    </p>        
+    {% endif %}
+  </div>
+  {% endif %}
+  <div class="first-two">
+  <div class="second_half_video col-sm-12">
+    <div class="video-popup">
+      <button type="button" class="btn"><img src="//cdn.shopify.com/s/files/1/0312/7689/2298/{{ section.settings.image11 }}"> </button>
+      <p class="about-the-brand">About the Brand<br><img src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/play-button.png?v=1585651178" data-toggle="modal" data-target="#size-chart"></p>
+      <!-- Video Start here -->
+
+      <div class="remodal" data-remodal-id="size-chart{{product_id}}" data-remodal-options="hashTracking: false">
+        <a data-remodal-action="close" class="remodal-close"></a>
+        <div class="details-page-size-chart">
+          <div class="modal fade" id="size-chart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                </div>
+                <div class="modal-body">
+
+                  <iframe width="100%" data-video-id="{{ section.settings.video_link3 }}" height="100%" src="https://www.youtube.com/embed/{{ section.settings.video_link3 }}?enablejsapi=1&rel=0&autoplay=0" frameborder="0" allowfullscreen="" volume="0"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div class="video-title">
+      <span class="block-title">{{ section.settings.title3 }}</span>
+    </div>
+  </div> 
+  </div>
+  </div>
+</div>
+<style>
+  .second_half_video.col-sm-12 {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .video-popup {text-align: center; position: relative;}
+  .about-the-brand {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    font-size: 30px;
+    color: #fff;
+    width: auto;
+  }
+  .about-the-brand img { 
+    padding: 4px;
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 20px;
+    transition: transform .5s;
+    cursor: pointer;
+  }
+  .about-the-brand img:hover {
+    transform: scale(1.2);
+  }
+  .video-popup button.btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 86%;
+    margin: auto;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 15px;
+    z-index: 0;
+}
+  .video-popup button.btn {
+  	cursor: inherit !important;
+  }
+  
+  @media (max-width: 767px) {
+    .video-popup button.btn:before {
+      width: 100%;
+    }
+  }  
+</style>
+  
+
+{% schema %}
+{
+"name": "About our brand",
+"settings": [
+{
+"type": "select",
+"id": "title_style",
+"label": "Title Style:",
+
+"options": [
+{
+"value": "style_1",
+"label": "Style 1" 
+},
+{ 
+"value": "style_2",
+"label": "Style 2" 
+}          
+],
+"default": "style_2"
+},
+{
+"type": "text",
+"id": "spotlight_block_title",
+"label": "Title",
+"default": "#Spotlight"
+},
+{
+"type" : "textarea",
+"id" : "spotlight_block_des",
+"label" : "Description",
+"default": "Phasellus lorem malesuada ligula pulvinar commodo maecenas"
+},
+{
+"type": "image_picker",
+"id": "image11",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "video_link3",
+"label": "YouTube video ID",
+"default": "_9VUPq3SxOc",
+"info": "[Find your YouTube video ID](https://docs.joeworkman.net/rapidweaver/stacks/youtube/video-id)."
+},
+{
+"type" : "text",
+"id" : "link_text1",
+"label" : "Shop Now Text",
+"default" : "Shop Now"
+}
+],
+"presets": [
+{
+"name": "About our brand",
+"category": "Advanced layout"
+}
+]
+}
+{% endschema %}
+

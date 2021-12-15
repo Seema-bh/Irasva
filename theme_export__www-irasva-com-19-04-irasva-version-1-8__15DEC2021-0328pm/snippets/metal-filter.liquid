@@ -1,0 +1,153 @@
+<div class="metal_filter">
+  {% assign metals =  product.metafields.product["metal"] | split:"," %}
+  {% assign metal = product.metafields.product['metal'] %}
+  {% if metals != blank %}
+  {% else %} 
+  {%- assign metals = "White,Yellow,Rose" | split:"," -%}
+  {% endif %}
+  
+  <div class="grid__item medium-up--three-quarters medium-up--push-one-eighth">
+    <label class="metal engraving">METAL
+    </label>
+    <div class="swatches_start cust_swatch">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 17 33" xml:space="preserve" class="arrow-down-svg"><g id="e4eb89a6-f885-43b8-9259-0d6b1516fab0"><g id="_x38_e584754-6657-46f1-a9d8-2cfd6623b552"><g><polygon points="14.9,14.5 0,0 0,3.7 11.1,14.5 13.2,16.5 11.1,18.5 0,29.3 0,33 14.9,18.5 17,16.5 "></polygon></g></g></g></svg>
+      <select id="metal" name="metal">
+        {%- assign counts = 0 -%}
+        {%- for metal in metals -%}
+        {%- capture metal_img_url -%}{{ metal | replace: ' ', '_' }}.png{%- endcapture -%}
+        {%- if counts == 0 -%}
+        <div class="variant-swatch cust_checked" title="14K {{ metal }}">
+          <!-- <img src="{{ metal_img_url | file_url}}" class="variant__button-label color-swatch {% if forloop.first %} active {%- endif -%}" >  
+<p class="metal-name">14K</p> -->
+          <option class="metal-name" value="14K {{ metal }}">14K {{ metal }}</option>
+        </div>
+        <div class="variant-swatch" title="18K {{ metal }}">
+          <!-- <img src="{{ metal_img_url | file_url}}" class="variant__button-label color-swatch {% if forloop.first %} active {%- endif -%}" >  
+<p class="metal-name">18K</p> -->
+          <option class="metal-name" value="18K {{ metal }}">18K {{ metal }}</option>
+        </div>
+        {%- capture counts -%}{{ counts | plus: 1 }}{%- endcapture -%}
+        {%- else -%}
+        <div class="variant-swatch" title="14K {{ metal }}">
+          <!-- <img src="{{ metal_img_url | file_url}}" class="variant__button-label color-swatch {% if forloop.first %} active {%- endif -%}" >  
+<p class="metal-name">14K</p> -->
+          <option class="metal-name" value="14K {{ metal }}">14K {{ metal }}</option>
+        </div>
+        <div class="variant-swatch" title="18K {{ metal }}">
+          <!-- <img src="{{ metal_img_url | file_url}}" class="variant__button-label color-swatch {% if forloop.first %} active {%- endif -%}" >  
+<p class="metal-name">18K</p> -->
+          <option class="metal-name" value="18K {{ metal }}">18K {{ metal }}</option>
+        </div>
+        {%- endif -%}
+        {%- endfor -%}
+      </select>
+      <span id="bg-metal"></span>
+    </div>
+  </div>
+  
+</div>
+
+<style>
+  .cust_checked img {
+    border-radius: 100%;
+    border: 2px solid;
+  }
+  .variant-swatch.color-swatch {
+    width: 35px;
+    height: 50px;
+    position: relative;
+    margin-right: 15px;
+    cursor:pointer;
+    /*     border-radius: 50px; */
+  }
+  .variant-swatch .color-swatch::before {
+    border: 0px solid #fff;
+  }
+  .variant-swatch label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    /*     border-radius: 50px; */
+  }
+  .variant-swatch.color-swatch.active {
+    box-shadow: 0 0 0 2px #000;
+  }
+  .variant-swatch.color-swatch:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  .variant-swatch.color-swatch .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 9;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .variant-swatch.color-swatch .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  #metal{
+    position: relative;
+    padding: 5px 32px 5px 16px;
+  }
+  #bg-metal.Platinum,#bg-metal.Yellow,#bg-metal.White,#bg-metal.Rose{
+    position: absolute;
+    width: 12px;
+    height: 40px;
+    border-radius: 4px;
+    z-index: 2;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+  } 
+  #bg-metal.Platinum{
+    background-color: #e5e4e2;
+    color: #e5e4e2;
+  }
+  #bg-metal.Yellow{
+    background-color: #FFFF00;
+    color: #FFFF00;
+  }
+  #bg-metal.Rose{
+    background-color: #FFB2AF;
+    color: #FFB2AF;
+  }
+  @media (max-width:767px){
+    .variant-swatch {
+      padding-left: 30px;
+    }
+    .variant-swatch.color-swatch .tooltiptext {
+      left: 120%;
+    }
+    .variant-swatch.color-swatch .tooltiptext::after {
+      left: 30%;
+    }
+  }
+</style>
+<script>
+  var selc = $('#metal');
+  selc.each(function() {
+    $('#bg-metal').addClass($(selc).children(':selected').val());
+  }).on('change', function() {
+    $('#bg-metal').attr('class', '').addClass($(selc).children(':selected').val());
+  });
+</script>

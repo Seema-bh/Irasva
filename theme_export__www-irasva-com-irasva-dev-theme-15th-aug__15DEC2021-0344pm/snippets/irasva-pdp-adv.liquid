@@ -1,0 +1,128 @@
+{% assign show_adv = false %}
+{% for tag in product.tags %}
+{% if tag contains "adv_" %}
+{% assign show_adv = true %}
+{% break %}
+{% endif %}
+{% endfor %}
+{% if show_adv %}
+
+
+
+<div class="brands-block">
+  <div class="widget-title not-before">
+    <h3 class="box-title">
+      <span class="title">
+        <span>
+          The Irasva Advantage
+        </span>
+      </span>
+    </h3>
+  </div>
+  <div class="row brands-slider slick-initialized slick-slider" data-brands-slider="" data-rows="3" style="display: flex;">
+    <div class="item col-6 col-sm-6 col-md-6 col-lg-12 adva_icons">
+      {% for tag in product.tags %}
+      {% if tag contains "adv_" %}
+      {% assign advantagesText = tag | split:"adv_" | last %}
+      {% assign advantagesIcon = tag | handle %}
+      {% assign iconWithExtension = advantagesIcon | replace:"-","_" | append:".png" %}
+      {% if iconWithExtension == "adv_15_day_money_back_assurance.png" %}
+      {% assign pageUrl = "/pages/return-policy" %}
+      {% elsif iconWithExtension == "adv_3_year_warranty.png" %}
+      {% assign pageUrl = "/pages/terms-conditions" %}
+      {% elsif iconWithExtension == "adv_free_shipping.png" %}
+      {% assign pageUrl = "/pages/shipping-policy" %}
+      {% elsif iconWithExtension == "adv_lifetime_maintenance.png" %}
+      {% assign pageUrl = "/pages/forever-shining-program" %}
+      {% elsif iconWithExtension == "" %}
+      {% assign pageUrl = "" %}
+      {% elsif iconWithExtension == "" %}
+      {% assign pageUrl = "" %}
+      {% endif %}
+      <div class="advantages-unit col-lg-4">
+        <a title="{{ advantagesText }}" href="{{ pageUrl }}">
+          <img src="{{ iconWithExtension | file_url }}" class="advantages-icon">
+        </a>
+        <div class="widget-title">
+          <h3 class="box-title">
+            <a title="{{ advantagesText }}" href="{{ pageUrl }}">
+              {% if iconWithExtension == "adv_15_day_money_back_assurance.png"  %}
+              <span class="title">
+                Buy-Back & 30 day money back assurance
+              </span>
+              {% else %}
+              <span class="title">
+                {{ advantagesText }}
+              </span>
+              {% endif %}
+            </a>
+          </h3>
+        </div>
+      </div> 
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .adva_icons {
+    display: contents;
+    column-count: 3;
+  }
+  .shopify-product-form .brands-block {
+    background-color: #f3f4f6;
+    text-align: center;
+    margin-top: 30px;
+    width: 85%;
+    border-radius: 8px;
+  }
+  .shopify-product-form .brands-block .brands-slider .widget-title .box-title .title {
+    background-color:transparent;
+    font-size: 10px;
+  }
+  .shopify-product-form .brands-block .brands-slider .widget-title .box-title{
+    line-height: 8px;
+    margin-bottom: 20px;
+  }
+  .shopify-product-form .brands-block .brands-slider .widget-title {
+    margin-bottom: 0px;
+    padding-top:5px;
+  }
+  .shopify-product-form .brands-block .widget-title.not-before .box-title .title span {
+    font-size: 14px;
+  }
+  .shopify-product-form .brands-block .widget-title.not-before {
+    margin-bottom: 15px;
+  }
+  .shopify-product-form .brands-block img {
+    border-radius: 0px;
+    height:35px;
+    width: initial;
+  }
+  .shopify-product-form .brands-slider {
+    width: 80%;
+    margin: auto;
+  }
+  @media (max-width: 768px) {
+    .shopify-product-form .brands-block {
+      width: 100%;
+    }
+  }
+  @media ( max-width: 1024px ) {
+    .adva_icons {
+      display: initial;
+      column-count: 3;
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+    }
+    .advantages-unit.col-lg-4 {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+    }
+  }
+</style>
+
+{% endif %}

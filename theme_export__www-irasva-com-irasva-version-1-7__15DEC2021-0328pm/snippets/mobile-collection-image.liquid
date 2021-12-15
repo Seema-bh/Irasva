@@ -1,0 +1,3 @@
+{% assign collection_handle = collection.handle %}
+{% assign mobile_img = collection_handle | append:'-mobile.jpg' | file_url %}
+<img class="mobile-collection-banner lazyload {{ settings.image_loading_style }} hidden-xs" src="{{ collection_handle | append:'-mobile.png' | file_url }}"/>

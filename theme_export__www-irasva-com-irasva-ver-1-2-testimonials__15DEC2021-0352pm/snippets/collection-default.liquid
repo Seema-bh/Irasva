@@ -1,0 +1,47 @@
+<div class="collection-template collection-template-with-banner translate-filter-pc">
+  <div class="reverse-mb">
+    <div class="container">
+      {% include 'breadcrumb' %}
+      {% section 'collection-header' %} 
+    </div>
+  </div>
+  {% comment %}
+  <div class="container">
+    {% include 'breadcrumb' %}
+    
+    <div class="halo-collection-content">
+      <div class="row">
+        {% section 'sidebar-filter' %}
+        {% section 'collection-template-default' %}
+      </div>
+      
+      {% section 'recently-viewed-products' %}
+    </div>
+  </div>
+  {% endcomment %}
+  <div class="container-padd60">
+    <div class="halo-collection-content">
+      <div class="row">
+        {% section 'sidebar-filter' %}
+        {% section 'collection-template-default' %}
+      </div>
+
+      <div class="bottom-desc">
+        {% assign description = collection.metafields.collection['description'] %}
+        {% if description != 0 and description != blank %}
+        {{ description }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if collection.title == "ALL COLLECTIONS" %}
+<style>
+  @media (min-width:768px){
+    .collection-image .page-header h1 span{
+      color:#fff;
+    }
+  }
+</style>
+{% endif %}

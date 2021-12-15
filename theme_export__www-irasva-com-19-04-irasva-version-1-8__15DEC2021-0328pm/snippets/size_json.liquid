@@ -1,0 +1,69 @@
+
+var product_type ="{{ product_type }}";
+if(product_type == "Ring"){
+var ring_size = '{  "Rings": ['+
+    '{  "size": "7",  "Ratio": "0.92"  },'+
+   ' {  "size": "8",   "Ratio": "0.93"  },'+
+    '{  "size": "9",   "Ratio": "0.94"  },'+
+   ' {  "size": "10",  "Ratio": "0.95"  },'+
+   ' {  "size": "11",  "Ratio": "0.97"  },'+
+    '{   "size": "12",  "Ratio": "0.98"  },'+
+   ' {   "size": "13",  "Ratio": "1"  },'+
+    '{   "size": "14",  "Ratio": "1.02"   },'+
+  '  {   "size": "15",   "Ratio": "1.03"  },'+ 
+   ' {   "size": "16",   "Ratio": "1.04"  },'+
+   ' {   "size": "17",  "Ratio": "1.05"  } ]}';
+}
+if(product_type == "Bangle"){  
+var ring_size = '{  "Rings": ['+
+    '{  "size": "2",  "Ratio": "0.92"  },'+
+    ' {  "size": "2.2",   "Ratio": "0.93"  },'+
+    '{  "size": "2.4",   "Ratio": "0.94"  },'+
+    ' {  "size": "2.6",  "Ratio": "0.95"  },'+
+    ' {  "size": "2.8",  "Ratio": "0.97"  },'+
+    '{   "size": "3",  "Ratio": "0.98"  },'+
+    ' {   "size": "3.2",  "Ratio": "1"  },'+
+    '{   "size": "3.4",  "Ratio": "1.02"   },'+
+    '  {   "size": "3.6",   "Ratio": "1.03"  },'+ 
+    ' {   "size": "3.8",   "Ratio": "1.04"  },'+
+    ' {   "size": "4",   "Ratio": "1"  },'+
+    ' {   "size": "4.2",   "Ratio": "1.04"  },'+
+    ' {   "size": "4.4",   "Ratio": "1.04"  },'+
+    ' {   "size": "4.6",   "Ratio": "1.04"  },'+
+    ' {   "size": "4.8",   "Ratio": "1.04"  },'+
+    ' {   "size": "5",  "Ratio": "1"  } ]}';
+
+}
+
+    var diamond = '{  "diamond": ['+
+    '{  "type": "{{product.metafields.product.diamond_01_type}}",   "caret_ratio": "{{ product.metafields.product.diamond_01_carat}}"  },'+
+    ' {  "type": "{{product.metafields.product.diamond_02_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_02_carat}}"  },'+
+    ' {  "type": "{{product.metafields.product.diamond_03_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_03_carat}}"  },'+
+    '{   "type": "{{product.metafields.product.diamond_04_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_04_carat}}"  },'+
+    ' {   "type": "{{product.metafields.product.diamond_05_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_05_carat}}"  },'+
+    '{   "type": "{{product.metafields.product.diamond_06_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_06_carat}}"   },'+
+    '  {   "type": "{{product.metafields.product.diamond_07_type}}",   "caret_ratio": "{{ product.metafields.product.diamond_07_carat}}"  },'+ 
+    ' {   "type": "{{product.metafields.product.diamond_08_type}}",   "caret_ratio": "{{ product.metafields.product.diamond_08_carat}}"  },'+
+    ' {   "type": "{{product.metafields.product.diamond_09_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_09_carat}}"  },'+
+    '{   "type": "{{product.metafields.product.diamond_10_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_10_carat}}"   } ]}';
+ 
+
+     $.cookie('size_ratio', '1', { expires: 1, path: '/'  });
+  $.cookie('caret_ratio', '1', { expires: 1, path: '/'  });
+  $.cookie('diamond_price_json', '0', { expires: 1, path: '/'  });
+  $.cookie('compare_diamond_json_price', '0', { expires: 1, path: '/'  });
+  var priceess = 0,
+  diamond_json = JSON.parse(diamond),
+  pro_id = "pro_id_{{ product.id }}",
+  gold_price = "{{ settings.gold_price }}",
+  weight = "{{ product.variants.first.weight_in_unit }}",
+  makig_charge = "{{ product.metafields.product.making_charges }}",
+  makig_charges = parseInt(makig_charge * weight),
+  diamond_carat = "{{ product.metafields.product.diamond_carat }}",
+  synergy_shape_range = "{{ product.metafields.product.synergy_shape_range }}",
+  compare_makig_charges = "{{ product.metafields.product.making_compare_charges }}",
+  cart = "{{ product.selected_variant.title }}";
+console.log("makig_charges",makig_charges,"weight",weight,"makig_charge---",makig_charge);
+if(ring_size != undefined){
+var json = JSON.parse(ring_size);
+}

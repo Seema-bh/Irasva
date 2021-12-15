@@ -1,0 +1,25 @@
+<div class="collection-template collection-template-with-banner translate-filter-pc">
+  <div class="reverse-mb">
+    <div class="container">
+      {% include 'breadcrumb' %}
+      {% section 'collection-header' %} 
+    </div>
+  </div>
+  
+  
+  <div class="container-padd60">
+    <div class="halo-collection-content">
+      <div class="row">        
+        {% section 'sidebar-filter' %}
+        {% section 'collection-template-with-banner' %}
+      </div>
+      {% section 'recently-viewed-products' %}
+      <div class="bottom-desc">
+        {% assign description = collection.metafields.collection['description'] %}
+        {% if description != 0 and description != blank %}
+        {{ description }}
+        {% endif %}
+      </div>
+    </div>   
+  </div>
+</div>

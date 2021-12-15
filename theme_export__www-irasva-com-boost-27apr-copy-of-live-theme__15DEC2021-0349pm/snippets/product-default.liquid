@@ -1,0 +1,26 @@
+<div class="product-template product-template-default">
+  <div class="container">
+    {% if collection %}
+    <div class="next_prev-groups">
+      {% include 'breadcrumb' %}
+      {% include 'next-prev-product' %} 	
+    </div>
+    
+    {% else %}
+    {% include 'breadcrumb' %}
+    {% endif %}
+  	   
+    <div class="halo-product-content">
+      <div class="row pro-page">
+        {% section 'sidebar-section' %}
+        {% section 'product-template-default' %}
+        {% comment %} {% section 'pdp-spotlight-slider' %} {% endcomment %}
+        {% section 'home-custom-block-baner' %}
+      </div>
+      {% comment %}
+      {% section 'home-brands-pdp' %}
+      {% endcomment %}
+      {% section 'recently-viewed-products' %}
+    </div>   
+  </div>
+</div>

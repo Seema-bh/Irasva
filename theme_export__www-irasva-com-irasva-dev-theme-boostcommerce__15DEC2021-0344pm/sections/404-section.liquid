@@ -1,0 +1,216 @@
+<div class="error_page">
+<div class="img-data">
+  <img data-src="//cdn.shopify.com/s/files/1/0312/7689/2298/files/gifttable.jpg?v=1582281874" src="//cdn.shopify.com/s/files/1/0312/7689/2298/files/gifttable.jpg?v=1582281874" class="lazyautosizes lazyloaded">
+</div>
+<div class="content-infos">
+  <div class="infos_data">
+    <h2>Oops!</h2>
+    <p style="margin-bottom:0;">looks like we broke something.</p>
+    <p class="hide-in-mob">why not try with our popular categories</p>
+    <p class="hide-in-desk mobile-btn"><a href="{{ shop.url }}" class="btn gotohome_btn">go to homepage  <img src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/Forward_Arrow.svg?244"></a></p>
+  </div>
+  <p class="hide-in-desk">why not try with our popular categories</p>
+  <div class="search-div-on-error hide-in-desk">
+    <form action="/search" method="get" class="search-bar" role="search">
+      <input type="hidden" name="type" value="product">
+
+      <input type="search" name="q" 
+              {% if settings.enable_multilang %} data-translate="general.search.placeholder" translate-item="placeholder"{% endif %} 
+              placeholder="{{ 'general.search.placeholder' | t }}" 
+              class="input-group-field header-search__input" aria-label="Search Site" autocomplete="off">
+
+      <button type="submit" class="btn icon-search">
+        {% include 'icon-search' %}
+      </button>
+    </form> 
+  </div>
+  <ul>
+    <li>
+      <a href="/collections/giftables">
+        <span><img data-src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/5new_copy_1024x1024_crop_center.jpg?v=1586520276" src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/5new_copy_1024x1024_crop_center.jpg?v=1586520276" class="lazyautosizes lazyloaded"></span>
+        <span>Gifts</span>
+      </a>
+    </li>
+    <li>
+      <a href="/collections/rings">
+        <span><img data-src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/8_1024x1024_crop_center.jpg?v=1586519388" src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/8_1024x1024_crop_center.jpg?v=1586519388" class="lazyautosizes lazyloaded"></span>
+        <span>Rings</span>
+      </a>
+    </li>
+    <li>
+      <a href="/collections/earrings">
+        <span><img data-src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/6_dcaeabf3-f46e-402e-af43-63bbe6451af8_1024x1024_crop_center.jpg?v=1586519412" src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/6_dcaeabf3-f46e-402e-af43-63bbe6451af8_1024x1024_crop_center.jpg?v=1586519412"  class="lazyautosizes lazyloaded"></span>
+        <span>Earrings</span>
+      </a>
+    </li>
+    <li>
+      <a href="/collections/bangles-and-bracelets">
+        <span><img data-src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/9_354390da-0347-4a2c-8e84-d1c7ee3fee61_1024x1024_crop_center.jpg?v=1586520369" src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/9_354390da-0347-4a2c-8e84-d1c7ee3fee61_1024x1024_crop_center.jpg?v=1586520369" class="lazyautosizes lazyloaded"></span>
+        <span>Bracelets</span>
+      </a>
+    </li>
+  </ul>
+  <div class="search-div-on-error hide-in-mob">
+    <form action="/search" method="get" class="search-bar" role="search">
+      <input type="hidden" name="type" value="product">
+
+      <input type="search" name="q" 
+              {% if settings.enable_multilang %} data-translate="general.search.placeholder" translate-item="placeholder"{% endif %} 
+              placeholder="{{ 'general.search.placeholder' | t }}" 
+              class="input-group-field header-search__input" aria-label="Search Site" autocomplete="off">
+
+      <button type="submit" class="btn icon-search">
+        {% include 'icon-search' %}
+      </button>
+    </form> 
+  </div>
+  <p class="desktop-btn"><a href="{{ shop.url }}" class="btn gotohome_btn">go to homepage  <img src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/Forward_Arrow.svg?244"></a></p>
+</div>
+</div>
+
+<style>
+.error_page{
+  position:relative; 
+}
+.error_page .img-data img{
+  width:100%;
+}
+.error_page .content-infos h2{
+  font-size: 52px;
+  margin-bottom: 15px;
+  line-height: 54px;
+  color: #005272;
+}
+.error_page .content-infos p{
+  font-size: 20px;
+  color: #df7e7a;
+  line-height: 24px; 
+  margin-bottom:20px;
+}
+.error_page .content-infos ul{
+  display:flex;
+  justify-content:space-between;
+}
+.error_page .content-infos ul li{
+  width:21%; 
+}
+.error_page .content-infos ul li span{
+  color: #df7e7a;
+  margin-top: 10px;
+  display: block;
+  font-size: 17px;
+}
+.search-div-on-error .search-bar{
+  width: 300px;
+  position: relative;
+  margin: 0 auto 20px;
+  background: transparent; 
+}
+.search-div-on-error .search-bar .input-group-field{
+  width: 100%;
+  border-radius: 50px;
+  background: transparent;
+  border: 1px solid #df7e7a;
+}
+.search-div-on-error .search-bar .icon-search{
+  width: 40px;
+  height:40px;
+  background: transparent;
+  border: none;
+  min-width: 40px;
+  position: absolute;
+  right: 0;
+  padding:0;
+}
+.search-div-on-error .search-bar .icon-search svg{
+  color:#505050; 
+}
+.error_page .content-infos .hide-in-desk{
+  display:none; 
+}
+.error_page .content-infos .hide-in-mob{
+  display:block; 
+}
+@media (min-width: 768px) {
+  .error_page .content-infos{
+    position: absolute;
+    right: 17%;
+    top: 50%;
+    transform: translate(0, -50%);
+    text-align: center;
+    width:400px;
+  }
+}
+    p.desktop-btn a.btn.gotohome_btn {
+  display: block;
+}
+p.hide-in-desk.mobile-btn a.btn.gotohome_btn {
+  display: none;
+}
+@media (max-width: 767px) {
+  p.desktop-btn a.btn.gotohome_btn {
+  display: none;
+}
+p.hide-in-desk.mobile-btn a.btn.gotohome_btn {
+  display: block;
+}
+  .error_page .img-data .hidden-xs{
+    display:none;
+  }
+  .error_page .img-data .visible-xs{
+    display:block;
+  }
+  .error_page .content-infos{
+    padding:20px;
+    text-align:center;
+  }
+  .error_page .content-infos a.btn{
+    width: 100%;
+    display: block;
+    max-width: 100%; 
+  }
+  .error_page .content-infos .hide-in-desk{
+    display:block; 
+  }
+  .error_page .content-infos .hide-in-mob{
+    display:none; 
+  }
+  .error_page .content-infos .infos_data{
+    position:absolute;
+    top:3%;
+    padding:0 20px;
+    left:0;
+    right:0;
+    text-align:center;
+  }
+  .error_page .content-infos .infos_data h2{
+    font-size: 40px;
+    line-height: 45px;
+  }
+  .error_page .content-infos .infos_data a.btn{
+    width:auto;
+    margin:10px 0 0;
+    display:inline-block;
+  }
+  .error_page .content-infos ul{
+    flex-wrap:wrap;
+  }
+  .error_page .content-infos ul li{
+    width:47%;
+    margin-bottom:15px;
+  }
+}
+</style>
+{% schema %}
+{
+"name": "404 Page",
+"settings": [
+{
+"type":"image_picker",
+"id":"background",
+"label":"Background"
+}
+
+]
+}
+{% endschema %}

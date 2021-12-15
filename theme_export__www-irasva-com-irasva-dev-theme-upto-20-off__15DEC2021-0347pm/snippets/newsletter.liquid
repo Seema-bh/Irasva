@@ -1,0 +1,99 @@
+{% if settings.display_popup_newsletter and page.handle != "video-consultation" %}
+<div class="wrapper-newsletter halo-modal" data-newsletter data-delay="{{settings.popup_newsletter_delay | times:1000}}">
+    <div class="modal-overlay">
+        <div class="halo-modal-content">
+            <a class="close close-window" title="{{ 'cart.ajax_cart.close' | t }}">
+                {% include 'icon-close' %}
+            </a>
+            <div class="halo-modal-body">
+              <div class="column-left">
+                {%- assign img_url = settings.newsletter | img_url: '2400x' -%}
+                {%- assign img_url_mob = settings.newsletter_mob | img_url: '2400x' -%}
+                <a href="{{ settings.buttonUrl }}" class="virtual-button">
+                  {% if settings.newsletter != blank %}
+                  <img data-src="{{ img_url }}" src="{{ img_url }}" class="lazyautosizes lazyloaded" data-sizes="auto">
+                  {% else %}
+                  <div class="not_img">
+                    360 x 360px
+                  </div>   
+                  {% endif %}
+                  <div class="store-location">
+                    <h3>Elegance just got a new pin code</h3>
+                    <p>Inorbit Mall, Malad</p>
+                    <span class="btn-new">Locate store</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<style>
+  a.virtual-button {
+    display: block;
+  }
+  .virtual-button span.btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 3px;
+    background: #005272;
+    color: #fff;
+  }
+  .store-location {
+    position: absolute;
+    right: 20px;
+    top: 110px;
+    text-align: center;
+  }
+  .store-location h3{
+    font-size: 22px;
+    margin-bottom: 5px;
+  }
+  .store-location p{
+    color: #005272;
+    font-size: 18px;
+    font-weight: 300;
+  }
+  .store-location .btn-new {
+    padding: 6px 20px;
+    background: #005272;
+    color: #fff;
+    border-radius: 4px;
+    margin-top: 10px;
+    display: inline-block;
+  }
+  
+  .store-location .btn-new:hover{
+  	opacity:0.8;
+  }
+  
+  @media (min-width:768px){
+    .virtual-button span.btn {
+      bottom: 30px;
+    }
+    
+  }
+  @media (max-width:767px){
+    .store-location {
+      position: absolute;
+      right: 10px;
+      top: 20px;
+      text-align: center;
+    }
+    .store-location h3 {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+    .store-location p {
+      font-size: 14px;
+    }
+    .store-location .btn-new {
+      padding: 3px 10px;
+      margin-top: 2px;
+      display: inline-block;
+    }
+  }
+</style>

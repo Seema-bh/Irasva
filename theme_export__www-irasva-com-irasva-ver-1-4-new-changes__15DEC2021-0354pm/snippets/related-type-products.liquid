@@ -1,0 +1,62 @@
+{% if collection and collection.products_count > 1 and collection.handle != "all-diamond-jewellery-collection" %}
+<section class="related-products" data-featured-products>
+  {% if section.settings.related_products_title %}
+  <div class="widget-title not-before">   
+    <h3 class="box-title">
+      <span class="title"> 
+        {% include 'multilang' with 'Products From Same Collection' %}
+      </span>
+    </h3>    
+  </div>
+  {% endif %}
+  
+  {% assign collectionHandle = collection.handle %}
+  
+  {% assign productType = product.type %}
+  <div class="widget-product">
+    <div class="products-grid row {{ class }}" data-row="{{ rows }}">
+      {% assign current_product = product %}
+      {% assign current_product_found = false %}
+      {% assign count = 0 %}
+      
+      {% for product in collections[collectionHandle].products %}
+      
+      {% if product.handle == current_product.handle %}
+      {% assign current_product_found = true %}
+      {% else %}
+      {% unless current_product_found == false and forloop.last %}
+      <div class="grid-item {{ grid_item_width }}{% if settings.product_image_border %} grid-item-border{% endif %} ">
+        {% include 'product-grid-item' %}
+      </div>      
+      {% assign count = count | plus:1 %}
+      {% endunless %}
+      {% endif %}
+      
+      {% endfor %}
+      
+    </div>
+  </div>  
+</section>
+{% if settings.product_layout == "gallery" or template.suffix == 'gallery' or settings.product_layout == "full_with" or template.suffix == 'full-width' %}
+<script>
+  $(document).ready(function() {
+    if (window.innerWidth >= 1200) {
+      var relatedBlock = $('.relate-verticle'),
+      productItem = relatedBlock.find('.products-grid .grid-item');
+      
+      var maxHeight = -1;
+      productItem.each(function() {
+        if ($(this).height() > maxHeight) {
+          maxHeight = $(this).height();
+        };
+      });
+      productItem.each(function() {
+        if ($(this).height() < maxHeight) {
+          $(this).css('margin', Math.ceil((maxHeight-$(this).height())/2) + 'px 0');
+        };
+      }); 
+    };          
+  });
+</script>
+{% endif %}
+{% endif %}

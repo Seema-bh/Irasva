@@ -1,0 +1,879 @@
+
+<div class="page-tpl">
+  <img src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/banner-try-home.jpg?v=1584010719" style="border-radius:0">
+  
+  <div class="container">
+
+    <div class="try_at_home_block">
+      <ul class="try_at_home_list">
+        <li>
+          <span><a href="/collections/all">+</a></span>
+        </li>
+        <li>
+          <span><a href="/collections/all">+</a></span>
+        </li>
+        <li>
+          <span><a href="/collections/all">+</a></span>
+        </li>
+        <li>
+          <span><a href="/collections/all">+</a></span>
+        </li>
+        <li>
+          <span><a href="/collections/all">+</a></span>
+        </li>
+      </ul>
+      <span id="handle_error" class="help-inline text-danger"></span>
+    </div>
+
+    <div class="des-form">
+      <div class="form_data">
+        <div class="box-form">
+          <h4>Your Address Details</h4>
+          <div id="contactFormWrapper">
+            <div class="identity-name flex">
+              <div class="form-group width50 marginr25">
+                <input type="text" id="contactFormName" name="name\" autocapitalize="words" placeholder="Name*">
+                <span id="name_error" class="help-inline text-danger"></span>
+              </div>
+              <div class="form-group width50">
+                <input type="email" name="email" id="contactFormEmail" autocorrect="off" autocapitalize="off" placeholder="Email ID*">
+                <span id="email_error" class="help-inline text-danger"></span>
+              </div>
+            </div>
+
+            <div class="address-pincode flex">
+              <div class="form-group marginr25 width50">
+                <input type="tel" name="mobile_no" id="contactFormPhone" pattern="[1-9]{1}[0-9]{9}" maxlength="10" minlength="10" placeholder="Mobile No*">
+                <span id="mobile_no_error" class="help-inline text-danger"></span>
+              </div>
+              <div class="form-group width50">
+                <textarea rows="1" name="address" id="contactFormAddress" {% if settings.enable_multilang %}data-translate="contact.form.placeholder_message" translate-item="placeholder"{%endif%} placeholder="Address"></textarea>
+                <span id="address_error" class="help-inline text-danger"></span>
+              </div>
+            </div>
+
+            <div class="email-mobile flex">
+              <div class="form-group marginr25 width50">
+                <textarea rows="1" name="landmark" id="contactFormLandmark" {% if settings.enable_multilang %}data-translate="contact.form.placeholder_message" translate-item="placeholder"{%endif%} placeholder="Landmark"></textarea>
+                <span id="landmark_error" class="help-inline text-danger"></span>
+              </div>
+              <div class="form-group width50">
+                <select name="pincode" id="pincode" required>
+                  <option selected disabled>Select your pincode</option>
+                  <option value="400001">400001</option> 
+                  <option value="400002">400002</option> 
+                  <option value="400003">400003</option> 
+                  <option value="400004">400004</option> 
+                  <option value="400005">400005</option> 
+                  <option value="400006">400006</option> 
+                  <option value="400007">400007</option> 
+                  <option value="400008">400008</option> 
+                  <option value="400009">400009</option> 
+                  <option value="400010">400010</option> 
+                  <option value="400011">400011</option> 
+                  <option value="400012">400012</option> 
+                  <option value="400013">400013</option> 
+                  <option value="400014">400014</option> 
+                  <option value="400015">400015</option> 
+                  <option value="400016">400016</option> 
+                  <option value="400017">400017</option> 
+                  <option value="400018">400018</option> 
+                  <option value="400019">400019</option> 
+                  <option value="400020">400020</option> 
+                  <option value="400021">400021</option> 
+                  <option value="400022">400022</option> 
+                  <option value="400023">400023</option> 
+                  <option value="400024">400024</option> 
+                  <option value="400025">400025</option> 
+                  <option value="400026">400026</option> 
+                  <option value="400027">400027</option> 
+                  <option value="400029">400029</option> 
+                  <option value="400030">400030</option> 
+                  <option value="400031">400031</option> 
+                  <option value="400032">400032</option> 
+                  <option value="400033">400033</option> 
+                  <option value="400034">400034</option> 
+                  <option value="400035">400035</option> 
+                  <option value="400036">400036</option> 
+                  <option value="400037">400037</option> 
+                  <option value="400038">400038</option> 
+                  <option value="400039">400039</option> 
+                  <option value="400042">400042</option> 
+                  <option value="400046">400046</option> 
+                  <option value="400050">400050</option> 
+                  <option value="400051">400051</option> 
+                  <option value="400052">400052</option> 
+                  <option value="400054">400054</option> 
+                  <option value="400055">400055</option> 
+                  <option value="400056">400056</option> 
+                  <option value="400057">400057</option> 
+                  <option value="400058">400058</option> 
+                  <option value="400060">400060</option> 
+                  <option value="400061">400061</option> 
+                  <option value="400062">400062</option> 
+                  <option value="400063">400063</option> 
+                  <option value="400064">400064</option> 
+                  <option value="400065">400065</option> 
+                  <option value="400066">400066</option> 
+                  <option value="400067">400067</option> 
+                  <option value="400068">400068</option> 
+                  <option value="400069">400069</option> 
+                  <option value="400070">400070</option> 
+                  <option value="400071">400071</option> 
+                  <option value="400072">400072</option> 
+                  <option value="400074">400074</option> 
+                  <option value="400075">400075</option> 
+                  <option value="400076">400076</option> 
+                  <option value="400078">400078</option> 
+                  <option value="400079">400079</option> 
+                  <option value="400080">400080</option> 
+                  <option value="400081">400081</option> 
+                  <option value="400082">400082</option> 
+                  <option value="400083">400083</option> 
+                  <option value="400085">400085</option> 
+                  <option value="400086">400086</option> 
+                  <option value="400087">400087</option> 
+                  <option value="400088">400088</option> 
+                  <option value="400089">400089</option> 
+                  <option value="400091">400091</option> 
+                  <option value="400092">400092</option> 
+                  <option value="400094">400094</option> 
+                  <option value="400095">400095</option> 
+                  <option value="400096">400096</option> 
+                  <option value="400097">400097</option> 
+                  <option value="400098">400098</option> 
+                  <option value="400099">400099</option> 
+                  <option value="400101">400101</option> 
+                  <option value="400102">400102</option> 
+                </select>
+                <span id="pincode_error" class="help-inline text-danger"></span>
+              </div>
+            </div>
+
+            <div class="city-country flex">
+              <div class="form-group marginr25 width50">
+                <input type="text" id="contactCity" name="city" autocapitalize="words" placeholder="City">
+                <span id="city_error" class="help-inline text-danger"></span>
+              </div>
+              <div class="form-group width50">
+                <input type="text" id="contactCountry" name="country" autocapitalize="words" placeholder="Country">
+                <span id="country_error" class="help-inline text-danger"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="description_data">
+        <h1 class="how_it">How It Works</h1>
+        <div class="row_1">
+          <div class="column_1">
+            <div class="col_1">1</div>
+            <div class="col_text_1">
+              <h5>SCHEDULE AN APPOINTMENT</h5>
+              <p>
+                Select the ‘Try At Home’ option to book an appointment to try 
+                on your desired jewellery. Submit your preferred date and time in the online pop-up form.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row_2">
+          <div class="column_1">
+            <div class="col_1">2</div>
+            <div class="col_text_1">
+              <h5>CONSULTATION</h5>
+              <p>
+                Our Consultant will reach out to you to understand your requirements and curate a personalised collection of pieces for you.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row_3">
+          <div class="column_1">
+            <div class="col_1">3</div>
+            <div class="col_text_1">
+              <h5>TRY AND BUY</h5> <p>
+              We will take you through your selection at your chosen time and location and help you make a decision. If you choose to purchase, you can place an order with our Consultant instantly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pick_your_time">
+      <h4>Try At Home Pick Your Date & Time</h4>
+      <span class="red_color">SELECT THE DATE</span>
+      <div class="select-date">
+      </div>
+      <span id="try_home_date_error" class="help-inline text-danger"></span>
+      <br>
+      <span class="red_color">SELECT AVAILABLE TIME</span>
+      <div class="select-time">
+        <div class="combine">
+        </div>
+        <span id="time_slot_error" class="help-inline text-danger"></span>
+      </div>
+      <div class="width10">
+        <a href="#" class="btn booking" id="booking"> PROCESS TO BOOK</a>
+      </div>
+      <span id="any_error" class="help-inline text-danger"></span>
+    </div>
+    <div class="frequently_ask_question">
+      <h1 class="how_it">Frequently Asked Questions</h1>
+      <div class="q_and_a">
+        <img src="https://www.irasva.com/skin/frontend/rwd/default/images/faq-bag.png" class="hidden-xs">
+        <h6 class="headeing">What is the Try At Home service?</h6>
+        <p class="text_data">The Try At Home service allows you to experience our collection of thoughtfully designed jewellery, in the comfort of your home or office at your own convenience.</p>
+        <br>
+        <h6 class="headeing">How do I book an appointment?</h6>
+        <p class="text_data">To book an appointment, you can submit your details via the website or call/whatsapp us on +91 87794 55404.
+          Alternatively, you can also email us on tryathome@irasva.com or reach out to us on our social media handles.
+          Our team will reach out to you and help you schedule an appointment as per your convenience of location and time.</p>
+        <br>
+        <h6 class="headeing">Where is the Try At Home service available?</h6>
+        <p class="text_data">Currently, the Try At Home service is available only in Mumbai.</p>
+        <br>
+        <h6 class="headeing">How many pieces of jewellery can I try via this service?</h6>
+        <p class="text_data">Once you book an appointment, we will reach out to you for a consultation and carry up to 5 pieces selected by you.
+          In addition we will carry an assortment of more than 300 pieces for you to view.</p> 
+        <br>
+        <h6 class="headeing">Is the jewellery sent for trial made of real gold and diamonds?</h6>
+        <p class="text_data">Yes, the jewellery selected by you will be made of real gold and diamonds.</p>
+        <br>
+        <h6 class="headeing">Is there a fee to avail of this service?</h6>
+        <p class="text_data">No, there is no fee to avail of the Try At Home service.</p>
+        <br>
+        <h6 class="headeing">Do I have to commit to buying a product to be able to Try At Home?</h6>
+        <p class="text_data">No, there is no obligation for you to buy a product. In case you choose to purchase; our representative can take down your order details for processing.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+<script>
+
+  //   function for the add day 
+  Date.prototype.addDays = function(days) {
+    var dat = new Date(this.valueOf())
+    dat.setDate(dat.getDate() + days);
+    return dat;
+  }
+
+  // function for get date array of the next 7 day 
+  function getDates(startDate, stopDate) {
+    var dateArray = new Array();
+    var currentDate = startDate;
+    while (currentDate <= stopDate) {
+      dateArray.push(currentDate)
+      currentDate = currentDate.addDays(1);
+    }
+    return dateArray;
+  }
+
+  //   date boxes create dynamically
+  var dateArray = getDates((new Date()).addDays(1), (new Date()).addDays(7));
+  for (i = 0; i < dateArray.length; i ++ ) {
+    var dd = dateArray[i].getDate();
+    var date = dateArray[i].getDate() + "-" + (dateArray[i].getMonth() + 1) + "-" + dateArray[i].getFullYear();
+    $('.select-date').append('<div class="date_data"><input type="radio" class="date_radio" id='+dd+' name="date" value='+date+'><label for='+dd+'>'+dd+'</label></div>');
+  }
+
+  //   time slot array create
+  function getTimeStops(start, end){
+    var startTime = moment(start, 'HH:mm');
+    var endTime = moment(end, 'HH:mm');
+
+    if( endTime.isBefore(startTime) ){
+      endTime.add(1, 'day');
+    }
+
+    var timeStops = [];
+
+    while(startTime <= endTime){
+      currentStartTime = new moment(startTime).format('hh:mm A');
+      startTime.add(120, 'minutes');
+      newCurrentTime  = new moment(startTime).format('hh:mm A');
+      timeStops.push(currentStartTime +' - '+ newCurrentTime);
+    }
+    return timeStops;
+  }
+
+  //   time slot boxes cerate dynamically
+  var timeStops = getTimeStops('9:00', '19:00');
+  for (i = 0; i < timeStops.length; i ++ ) {
+    trim_slot_type = timeStops[i].replace(/\s/g, '');
+    $('.combine').append('<div class="times_data"><input type="radio" class="time_slot" id='+trim_slot_type+' name="time_slot" value='+trim_slot_type+'><label for='+trim_slot_type+'>'+timeStops[i]+'</label></div>');
+  }
+
+  //   	ajax call for insert data into database
+  $(".booking").click(function(e) {
+    var handle = Cookies.get("try_it");
+    var name = $('#contactFormName').val();
+    var email = $('#contactFormEmail').val();
+    var mobile_no = $('#contactFormPhone').val();
+    var address = $('#contactFormAddress').val();
+    var landmark = $('#contactFormLandmark').val();
+    var pincode = $('#pincode').val();
+    var city = $('#contactCity').val();
+    var country = $('#contactCountry').val();
+    var try_home_date = $("input[type='radio'].date_radio:checked").val();
+    var time_slot = $("input[type='radio'].time_slot:checked").val();
+
+    e.preventDefault();
+    $("[id$='_error']").empty();
+    $.ajax({
+      type: "POST",
+      url: "https://www.shopifyapp.irasva.com/api/try-at-home",
+      data: {handle, name, email, mobile_no, address, landmark, pincode, city, country, try_home_date, time_slot},
+      success: function(result) {
+        var try_it_cookie = '{"objects":[]}';
+        $.cookie("try_it", try_it_cookie, {
+          expires: 365,
+          path: "/"
+        });
+        window.location.href = "/pages/tah-thank-you";
+      },
+      error: function(result) {
+        $.each(result.responseJSON.error, function(k,v){
+          $('#'+k+'_error').text(v[0]);
+          $('#any_error').text('solve the eror');
+        }); 
+      }
+    });
+  });
+
+  var try_it = Cookies.get("try_it");
+  console.log(try_it, "hmmm");
+  var json = JSON.parse(try_it);
+  console.log(json,"jsssonnnnn");
+  $.each(json.objects, function(i, obj) {
+    $(".try_at_home_list").prepend(
+      '<div class="tah_product_item"><div class="remove" product_id="' +
+      json.objects[i].id +
+      '" onclick="remove_try(this)">X</div><img src="' +
+      json.objects[i].type +
+      '">' +
+      json.objects[i].name +
+      '<br>' +
+      json.objects[i].price +
+      "</div>"
+    );
+  });
+  function remove_try(o) {
+    var try_it = Cookies.get("try_it");
+    var json = JSON.parse(try_it);
+    var product_id = $(o).attr("product_id");
+    $(o)
+    .parent(".tah_product_item")
+    .remove();
+    $.each(json.objects, function(idx, obj) {
+      if (json.objects[idx].id == product_id) {
+        var count_try = $(".try_count").html();
+        console.log(count_try--);
+        $(".try_count").html(count_try--);
+        delete json.objects[idx];
+        var rtr = JSON.stringify(json);
+        var rtr = rtr
+        .replace("null,", "")
+        .replace("null", "")
+        .replace("},]", "}]")
+        .replace("[,{", "[{")
+        .replace(",null,", "")
+        .replace(",null", "");
+        $.cookie("try_it", rtr, {
+          expires: 365,
+          path: "/"
+        });
+        $(".try_this")
+        .attr("onclick", "add_try(this)")
+        .html("Try This Peice");
+        console.log(rtr, "removed");
+      }
+    });
+  }
+
+</script>
+<style>
+  .time_slot {
+    position: absolute;
+    top: 9px;
+    left: 8px;
+  }
+  .date_data {
+    width: 20%;
+    text-align: center;
+    margin: 10px;
+    border: 1px solid;
+    height: 155px;
+    border-radius: 8px;
+  }
+  .date_data label {
+    font-size: 50px;
+    position: absolute;
+    padding-top: 5%;
+    margin-left: -34px;
+  }
+  .times_data {
+    position: relative;
+    padding: 9px;
+    width: 20%;
+    text-align: center;
+    margin: 10px;
+    border: 1px solid;
+    border-radius: 8px;
+  }
+  .times_data label {
+    margin-bottom: 0;
+    padding-left: 4px;
+    font-size: 15px;
+  }
+  .date_radio {
+    margin-top: 46%;
+    vertical-align: middle;
+    margin-right: 40px;
+  }
+  .width10 {
+    width:100%;
+  }
+  a.btn.booking {
+    background: #005272;
+    color: #fff;
+    margin-top: 16px;
+    width: auto;
+    text-align: left;
+  }
+  .select-date {
+    display: flex;
+  }
+  .times {
+    width: 33.3333333%;
+    text-align: center;
+    border: 1px solid;
+    margin: 10px;
+    padding: 6px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: "argent_cfregular";
+  }
+  .combine {
+    display: flex;
+  }
+  .dates p {
+    padding-top: 36px;
+    font-size: 50px;
+    font-family: "Soleil";
+  }
+  span.red_color {
+    font-size: 14px;
+    color: #d87e7a;
+    font-family: "Soleil";
+    letter-spacing: 1px;
+  }
+  .pick_your_time h4 {
+    color: #005272;
+    font-family: "SoleilW01-SemiBold";
+    font-size: 22px;
+    font-weight: 100;
+  }
+  .pick_your_time {
+    border: 1px solid;
+    padding: 60px;
+    margin-top: 50px;
+  }
+  a.back {
+    color: #000;
+    text-transform: capitalize;
+    font-weight: 200;
+    font-size: 18px;
+    letter-spacing: 2px;
+    line-height: 60px;
+  }
+  p.text_data {
+    color: #003f5aa1;
+    font-size: 15px;
+    line-height: 30px;
+    font-family: "SoleilW01-Book";
+    letter-spacing: 1.1px;
+  }
+
+  h6.headeing {
+    color: #005272;
+    font-family: "SoleilW01-Book";
+    font-size: 17px;
+    font-weight: 100;
+    margin-bottom: 10px;
+  }
+  .date-time label {
+    padding-top: 6px;
+    padding-right: 10px;
+  }
+  .box-form input.btn {
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #d9958f;
+  }
+  .box-form input, .box-form textarea {
+    border: 1px solid #d9958f !important;
+  }
+  .box-form select {
+    margin-bottom: 0;
+    background-color: #fff ;
+    border: 1px solid #d9958f;
+    width: 100%;
+    font-family: "SoleilW01-SemiBold";
+    letter-spacing: 1.8px;
+    font-size: 13px;
+    color: #757575;
+  }
+  .tryathomeSec2Col2btn {
+    width: 50%;
+    float: left;
+    font-weight: 300;
+    text-align: center;
+  }
+  .box-form h4 {
+    font-family: "Soleil";
+    font-weight: 100;
+    color: #005272;
+    text-align: left;
+    letter-spacing: 3.2px;
+    font-size: 25px;
+  }
+  a.hitnum {
+    display: inline-block;
+    width: 212px;
+    vertical-align: top;
+    text-align: center;
+    font-size: 18px;
+    color: #003f5a;
+    font-weight: 300;
+    padding: 8px 0px;
+    border: 1px solid #cf917e;
+    background: #fff;
+    -webkit-box-shadow: 3px 3px 3px 0px rgba(129,129,129,0.8);
+    -moz-box-shadow: 3px 3px 3px 0px rgba(129,129,129,0.8);
+    -ms-box-shadow: 3px 3px 3px 0px rgba(129,129,129,0.8);
+    -o-box-shadow: 3px 3px 3px 0px rgba(129,129,129,0.8);
+    box-shadow: 3px 3px 3px 0px rgba(129,129,129,0.8);
+  }
+  .box-form {
+    padding: 120px 30px;
+    border: 1px solid #005272;
+  }
+  .des-form {
+    width: 100%;
+    display: flex;
+  }
+  .description_data {
+    width: 40%;
+    text-align: left;
+    padding-right: 0;
+    border: 1px solid #005272;
+    padding: 20px;
+  }
+  .form_data {
+    width: 57%;
+    margin-right: 39px;
+  }
+  .col_text_1 {
+    padding-left: 30px;
+  }
+  .col_text_1 h5 {
+    margin-bottom: 0;
+    color: #003f5a;
+    text-transform: capitalize;
+    font-weight: 200;
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+  .col_text_1 p {
+    font-size: 15px;
+  }
+  .column_1 {
+    margin-bottom: 40px;
+    font-size: 13px;
+    display: flex;
+  }
+  .col_1 {
+    font-size: 100px;
+    color: #a5b9c4;
+    font-family: 'LTCGlobeGothic';
+    padding-top: 30px;
+  }  
+  .how_it {
+    font-size: 38px;
+    margin-bottom: 1em;
+    font-family: "argent_cfregular";
+    font-weight: 100;
+    color: #005272;
+    letter-spacing: 2.1px;
+  }
+  .frequently_ask_question {
+    margin-top: 50px;
+    border: 1px solid;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  .frequently_ask_question h1.how_it {
+    text-align: center;
+    font-weight: 100;
+    font-family: "argent_cfregular";
+  }
+  .q_and_a {
+    padding-right: 38%;
+    background-image: url(https://www.irasva.com/skin/frontend/rwd/default/images/faq-bag.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-top: 30px;
+  }
+  .try_at_home_list {
+    width: 100%;
+    display: -webkit-inline-box;
+    overflow-x: scroll;
+  }
+  .tah_product_item {
+    max-width: 20%;
+    padding: 0 10px;
+    position: relative;
+    border: 1px solid #ebebeb;
+    margin: 10px;
+    text-align: center;
+    color: #005272;
+  }
+  .try_at_home_list li a {
+    font-size: 50px;
+    vertical-align: middle;
+  }
+  .try_at_home_list li {
+    background-color: #ebebeb;
+    border: 1px solid #005272;
+    margin: 10px 0;
+    cursor: text;
+    width: 50%;
+    padding: 10px;
+    max-width: 200px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    text-align: center;
+  }
+  .tah_product_item img {
+    width: 80%;
+    margin: inherit;
+  }
+  .try_at_home_list > li:nth-last-child(1),
+  .try_at_home_list > li:nth-last-child(2),
+  .try_at_home_list > li:nth-last-child(3),
+  .try_at_home_list > li:nth-last-child(4),
+  .try_at_home_list > li:nth-last-child(5) {
+    display: none;
+  }
+  li.slick-slide {
+    display: none !important;
+  }
+  .try_at_home_list > li:nth-child(1),
+  .try_at_home_list > li:nth-child(2),
+  .try_at_home_list > li:nth-child(3),
+  .try_at_home_list > li:nth-child(4),
+  .try_at_home_list > li:nth-child(5) {
+    display: flex;
+  }
+  .remove {
+    font-family: "Soleil";
+    position: absolute;
+    right: 0;
+    background: transparent;
+    padding: 0px 6px;
+    border-radius: 100%;
+    color: #0000009c;
+    font-size: 16px;
+    cursor: pointer;
+
+  }
+  .try_at_home_block {
+    margin: 50px 0;
+  }
+  @media( max-width :820px ) {
+    .try_at_home_list li {
+      width: 46%;
+      margin-left: 10px;
+    }
+    .times_data {
+      padding: 4px;
+      width: 47%;
+      margin: 4px;
+    }
+    .combine, .select-date {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .date_data label {
+      font-size: 32px;
+      padding-top: 6%;
+    }
+    .date_radio {
+      margin-top: 34%;
+    }
+    .date_data {
+      width: 26.5%;
+      margin: 10px;
+      height: 78px;
+    }
+    .times_data label {
+      margin-bottom: 0;
+      padding-left: 0;
+      font-size: 13px;
+    }
+    .how_it {
+      font-size: 36px;
+      text-align: center;
+    }
+    .frequently_ask_question h1.how_it {
+      font-size: 24px;
+    }
+    .q_and_a {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: right;
+      padding: 0;
+      padding-right: 6px;
+      background-image: none;
+    }
+    .tah_product_item {
+      max-width: 50%;
+    }
+    .try_at_home_block {
+      margin: 30px 0;
+    }
+    .box-form {
+      padding: 25px 14px;
+      margin-bottom: 50px;
+    }
+    .dates p {
+      font-size: 30px;
+    }
+    .times {
+      margin: 6px;
+      padding: 3px;
+      font-size: 14px;
+    }
+    a.btn.booking {
+      width: auto;
+    }
+    .frequently_ask_question {
+      padding-left: 20px;
+      padding-right: 10px;
+    }
+    .dates {
+      margin: 6px;
+      height: 100px;
+    }
+    .pick_your_time {
+      padding: 20px;
+    }
+    .des-form {
+      display: block;
+    }
+    a.hitnum{
+      width: 49%;
+      padding: 8px 8px;
+      font-size: 14px;
+
+    }
+    .description_data {
+      width: 100%;
+      padding-right: 0;
+    }
+    .form_data {
+      width: 100%;
+    }
+    .col_text_1 {
+      padding-left: 30px;
+    }
+  }
+  @media ( min-width: 821px ) and ( max-width: 1348px ) {
+    .box-form {
+      padding: 141px 30px;
+    }
+    .try_at_home_list li {
+      width: 16%;
+    }
+    .frequently_ask_question {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+    .pick_your_time {
+      padding: 30px
+    }
+    .form_data {
+      width: 55%;
+    }
+    .description_data {
+      width: 45%;
+    }
+    .col_text_1 {
+      padding-left: 16px;
+    }
+  }
+  @media ( min-width: 821px ) and ( max-width: 1199px ) {
+    a.hitnum {
+      width: 156px;
+      font-size: 13px;
+    }
+    .times_data {
+      padding: 4px;
+      margin: 4px;
+    }
+    .times_data label {
+      padding-left: 14px;
+    }
+  }
+  @media ( min-width: 1200px ) and ( max-width: 1400px ) {
+    .times_data label {
+      padding-left: 16px;
+    }
+    a.hitnum {
+      width: 200px;
+    }
+    .times_data {
+      padding: 4px;
+    }
+    .date_data {
+      height: 150px;
+    }
+    .date_data label{
+      padding-top: 4%;
+    }
+    .date_radio {
+      margin-top: 39%;
+    }
+  }
+  @media ( max-width: 400px ) {
+    .times_data label {
+      padding-left: 12px;
+    }  
+  }
+</style>
+
+{% comment %}
+<style>
+  h1 {
+    margin-top: 50px;
+    text-align: center;
+  }
+  @media (max-width:767px){
+    h1 {
+      font-size: 32px;
+    }
+  }
+</style>
+<h1>Temporarily unavailable</h1>
+{% endcomment %}

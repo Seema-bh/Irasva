@@ -1,0 +1,43 @@
+
+var ring_size = '{  "Rings": ['+
+'{   "size": "4",  "Ratio": "0.5" },'+
+' {  "size": "5",   "Ratio": "0.6"   },'+
+'{  "size": "6",  "Ratio": "0.7" },'+
+'{  "size": "7",  "Ratio": "0.75"  },'+
+' {  "size": "8",   "Ratio": "0.8"  },'+
+'{  "size": "9",   "Ratio": "0.84"  },'+
+' {  "size": "10",  "Ratio": "0.89"  },'+
+' {  "size": "11",  "Ratio": "0.93"  },'+
+'{   "size": "12",  "Ratio": "0.96"  },'+
+' {   "size": "13",  "Ratio": "1"  },'+
+'{   "size": "14",  "Ratio": "1.06"   },'+
+'  {   "size": "15",   "Ratio": "1.12"  },'+ 
+' {   "size": "16",   "Ratio": "1.15"  },'+
+' {   "size": "17",  "Ratio": "1.89"  },'+
+'{   "size": "18",  "Ratio": "12"   } ]}';
+
+var diamond = '{  "diamond": ['+
+'{  "type": "{{product.metafields.product.diamond_01_type}}",   "caret_ratio": "{{ product.metafields.product.diamond_01_carat}}"  },'+
+' {  "type": "{{product.metafields.product.diamond_02_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_02_carat}}"  },'+
+' {  "type": "{{product.metafields.product.diamond_03_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_03_carat}}"  },'+
+'{   "type": "{{product.metafields.product.diamond_04_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_04_carat}}"  },'+
+' {   "type": "{{product.metafields.product.diamond_05_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_05_carat}}"  },'+
+'{   "type": "{{product.metafields.product.diamond_06_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_06_carat}}"   },'+
+'  {   "type": "{{product.metafields.product.diamond_07_type}}",   "caret_ratio": "{{ product.metafields.product.diamond_07_carat}}"  },'+ 
+' {   "type": "{{product.metafields.product.diamond_08_type}}",   "caret_ratio": "{{ product.metafields.product.diamond_08_carat}}"  },'+
+' {   "type": "{{product.metafields.product.diamond_09_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_09_carat}}"  },'+
+'{   "type": "{{product.metafields.product.diamond_10_type}}",  "caret_ratio": "{{ product.metafields.product.diamond_10_carat}}"   } ]}';
+
+console.log("hajhihihihihih");
+$.cookie('size_ratio', '1', { expires: 1, path: '/'  });
+$.cookie('caret_ratio', '1', { expires: 1, path: '/'  });
+$.cookie('diamond_price_json', '', { expires: 1, path: '/'  });
+var priceess = 0,
+json = JSON.parse(ring_size),
+diamond_json = JSON.parse(diamond),
+pro_id = "pro_id_{{ product.id }}",
+gold_price = "{{ settings.gold_price }}",
+weight = "{{ product.variants.first.weight_in_unit }}",
+makig_charges = "{{ product.metafields.product.making_charges }}",
+cart = "{{ product.selected_variant.title }}";
+if (cart == "") {  var cart = "{{ product.variants[0].title }}"; }

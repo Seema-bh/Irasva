@@ -1,0 +1,66 @@
+  <div class="container page-orders">
+    <div class="account_top_sec_info">
+      <header class="page-header">
+        <h1 {% if settings.enable_multilang %}data-translate="customer.account.title"{%endif%}>Order</h1>
+        
+      </header>
+      <div class="log_out_opt">
+        {% if customer %}
+        <h6><a href="/account/logout">LOGOUT</a></h6>
+        {% endif %}
+      </div>
+    </div>
+    <h5 class="center">{{ customer.name }}</h5>
+
+    {% paginate customer.orders by 20 %}
+    <a name="pagecontent" id="pagecontent"></a>
+
+    <div class="account-tab text-center">
+      <div class="tab-link">
+        <a href="/account">PROFILE</a>
+        <a class="active order_click" href="javascript:void(0);">ORDERS</a>
+      </div>
+    </div>
+
+    <div class="section clearfix account-section min-height">
+      <main class="account-main">
+        <div id="customer_orders">
+
+          {% if customer.orders.size != 0 %}
+          <div class="loop-order-info">
+            {% for order in customer.orders %}
+            <div class="order-quick-info relative">
+              <div class="quick-info">
+                <table>
+                <thead>
+                <th>ORDER</th>
+                <th>DATE</th>
+                <th>PAYMENT STATUS</th>
+                <th>FULFILLMENT STATUS</th>
+                <th>TOTAL</th>   
+                </thead>
+                <tbody>
+                <tr>
+                <td><b>{{ order.name | link_to: order.customer_url }}</b></td>
+                <td><span class="purchase-date">{{ order.created_at | date: format: "month_day_year" }}</span></td>
+                <td><p><span class="label">{{ order.financial_status_label }}</span></p></td>
+                <td><p>{{ order.fulfillment_status_label }}</p></td>
+                <td> <p class="order-amount">{{ order.total_price | money }}</p></td>
+                </tr>
+                </tbody>
+                </table>
+                </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% else %}
+          <p class="text-center no-order">{{ 'customer.orders.none' | t }}</p>
+          {% endif %}
+          {% if customer.orders.size > 10 %}
+          {% include 'pagination' with true %}
+          {% endif %}
+        </div>
+      </main>
+    </div>
+    {% endpaginate %}
+  </div>

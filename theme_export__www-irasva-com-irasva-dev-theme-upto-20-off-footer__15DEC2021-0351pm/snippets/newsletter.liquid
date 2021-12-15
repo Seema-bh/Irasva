@@ -1,0 +1,108 @@
+{% if settings.display_popup_newsletter and page.handle != "video-consultation" %}
+<div class="wrapper-newsletter halo-modal" data-newsletter data-delay="{{settings.popup_newsletter_delay | times:1000}}">
+  <div class="modal-overlay">
+    <div class="halo-modal-content">
+      <a class="close close-window" title="{{ 'cart.ajax_cart.close' | t }}">
+        {% include 'icon-close' %}
+      </a>
+      <div class="halo-modal-body">
+        <div class="column-left">
+          {%- assign img_url = settings.newsletter | img_url: '800x' -%}
+          {%- assign img_url_mob = settings.newsletter_mob | img_url: '800x' -%}
+
+          {% if settings.newsletter != blank %}
+          <a href="{{ settings.buttonUrl }}">
+            <img data-src="{{ img_url }}" src="{{ img_url }}" class="lazyautosizes lazyloaded" data-sizes="auto">
+          </a>
+          {% else %}
+          <div class="not_img">
+            360 x 360px
+          </div>   
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<style>
+  a.virtual-button {
+    display: block;
+  }
+  .virtual-button span.btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 3px;
+    background: #005272;
+    color: #fff;
+  }
+  .store-location {
+    position: absolute;
+    right: 20px;
+    top: 110px;
+    text-align: left;
+    max-width: 260px;
+  }
+
+  .store-location h3{
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #005272;
+  }
+  .store-location a {
+    display: block;
+    line-height: 30px;
+    font-size: 18px;
+  }
+  .store-location .btn-new {
+    padding: 6px 20px;
+    background: #005272;
+    color: #fff;
+    border-radius: 4px;
+    margin-top: 10px;
+    display: inline-block;
+  }
+
+  .store-location .btn-new:hover{
+    opacity:0.8;
+  }
+
+  @media (min-width:768px){
+    .virtual-button span.btn {
+      bottom: 30px;
+    }
+    .visible-mobile-popup{
+      display:none;
+    }
+  }
+  @media (max-width:767px){
+    .store-location {
+      right: 10px;
+      top: 40px;
+      max-width: 160px;
+    }
+    .store-location a {
+      display: block;
+      line-height: 20px;
+      font-size: 12px;
+      font-weight: 400;
+    }
+    .store-location h3 {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    .store-location p {
+      font-size: 14px;
+    }
+    .store-location .btn-new {
+      padding: 3px 10px;
+      margin-top: 2px;
+      display: inline-block;
+    }
+    .visible-desktop-popup{
+      display:none;
+    }
+  }
+</style>

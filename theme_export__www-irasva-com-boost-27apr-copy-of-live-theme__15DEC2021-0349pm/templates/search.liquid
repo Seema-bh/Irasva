@@ -1,0 +1,121 @@
+<div class="search-page collection-template collection-template-default" data-search-page>  
+  <div class="container">
+    <header class="page-header">
+      <h2 class="bc-sf-search-result-header">{% include 'bc-sf-filter-skeleton', width: 2 %}</h2>
+    </header>
+    
+    <div class="halo-collection-content">
+      <div class="row">
+        <div class="col-12 col-md-3 col-sidebar sidebar">
+          <a href="javascript:void(0)" title="{{ 'cart.general.close_cart' | t }}" class="close-sidebar close">
+            {% include 'icon-close' %}    
+          </a>
+
+          <div class="sidebar-filter" data-has-collapse>
+            {% if settings.category_layout == "right_sidebar" or settings.category_layout == "express_order" or template.suffix == 'express-order' or settings.category_layout == "mansory" or template.suffix == 'mansory' or settings.category_layout == "full_with" or template.suffix == 'fullwidth' or template.suffix == 'right-sidebar' or settings.category_layout == "with_banner" or template.suffix == 'with-banner' %}
+            <a href="javascript:void(0)" title="{{ 'cart.general.close_cart' | t }}" class="close-sidebar close">
+              {% include 'icon-close' %}    
+            </a>
+            {% endif %}
+
+            <div id="bc-sf-filter-tree">{% include 'bc-sf-filter-tree-placeholder' %}</div>        
+          </div>
+        </div>
+        
+        <div class="col-12 col-md-9">
+          <div class="toolbar">       
+            <div class="column-left">
+              <div class="sidebar-label">
+                <span class="icon-filter">
+                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" version="1.1" x="0px" y="0px" viewBox="0 0 48 48" xml:space="preserve"><g><path d="M6,48c-0.552,0-1-0.447-1-1v-7c0-0.553,0.448-1,1-1s1,0.447,1,1v7C7,47.553,6.552,48,6,48z"></path><path d="M6,31c-0.552,0-1-0.447-1-1V1c0-0.553,0.448-1,1-1s1,0.447,1,1v29C7,30.553,6.552,31,6,31z"></path><g><path d="M6,41c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S9.309,41,6,41z M6,31c-2.206,0-4,1.794-4,4s1.794,4,4,4s4-1.794,4-4    S8.206,31,6,31z"></path><path d="M42,48c-0.552,0-1-0.447-1-1V26c0-0.553,0.448-1,1-1s1,0.447,1,1v21C43,47.553,42.552,48,42,48z"></path><path d="M42,17c-0.552,0-1-0.447-1-1V1c0-0.553,0.448-1,1-1s1,0.447,1,1v15C43,16.553,42.552,17,42,17z"></path><path d="M42,27c-3.309,0-6-2.691-6-6s2.691-6,6-6s6,2.691,6,6S45.309,27,42,27z M42,17c-2.206,0-4,1.794-4,4s1.794,4,4,4    s4-1.794,4-4S44.206,17,42,17z"></path><path d="M24,48c-0.552,0-1-0.447-1-1V21c0-0.553,0.448-1,1-1s1,0.447,1,1v26C25,47.553,24.552,48,24,48z"></path><path d="M24,12c-0.552,0-1-0.447-1-1V1c0-0.553,0.448-1,1-1s1,0.447,1,1v10C25,11.553,24.552,12,24,12z"></path><path d="M24,22c-3.309,0-6-2.691-6-6s2.691-6,6-6c3.309,0,6,2.691,6,6S27.309,22,24,22z M24,12c-2.206,0-4,1.794-4,4s1.794,4,4,4    s4-1.794,4-4S26.206,12,24,12z"></path></g></g></svg>
+                </span>
+                <span class="sidebar_more" {% if settings.enable_multilang %}data-translate="collections.sidebar.sidebar_more"{% endif %}>
+                  {{ 'collections.sidebar.sidebar_more' | t }}
+                </span>
+              </div>
+            </div>
+            
+            <div class="column-right">
+                <div class="bc-sf-filter-toolbar-item text-right bc-sf-filter-custom-sorting toolbar-col" id="bc-sf-filter-top-sorting">{% include 'bc-sf-filter-skeleton', width: 2 %}</div>              
+            </div>
+            
+          </div>
+          
+          <div id="bc-sf-filter-products" class="product-collection products-grid row">
+            {% comment %} Fix Shopify search term report {% endcomment %}
+            {% paginate search.results by 2 %}
+              {% if search.performed %}
+                {% for item in search.results %}
+                  <div class="row" style="display: none !important"></div>
+                {% endfor %}
+              {% endif %}
+            {% endpaginate %}
+          </div>
+          
+          <div class="padding">
+            <div class="toolbar-bottom" id="toolbar-bottom">
+              <p class="page-total" id="bc-sf-filter-total-products"></p>
+              <ul class="bc-sf-filter-pagination-page" id="bc-sf-filter-bottom-pagination"></ul>
+              <div id="bc-sf-filter-load-more"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Declare bcSfFilterConfig variable
+  var bcSfFilterConfig = {
+    label: {
+      sorting: {% assign temp = 'collections.sorting.title' | t  %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Sorting" {% endunless %},
+      sorting_best_selling: {% assign temp = 'collections.sorting.best_selling' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Best Selling" {% endunless %},
+      sorting_featured: {% assign temp = 'collections.sorting.featured' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Featured" {% endunless %},
+      sorting_title_ascending: {% assign temp = 'collections.sorting.az' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Alphabetically, A-Z" {% endunless %},
+      sorting_title_descending: {% assign temp = 'collections.sorting.za' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Alphabetically, Z-A" {% endunless %},
+      sorting_price_ascending: {% assign temp = 'collections.sorting.price_ascending' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Lowest Price" {% endunless %},
+      sorting_price_descending: {% assign temp = 'collections.sorting.price_descending' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Highest Price" {% endunless %},
+      sorting_date_ascending: {% assign temp = 'collections.sorting.date_ascending' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Date, Old to New" {% endunless %},
+      sorting_date_descending: {% assign temp = 'collections.sorting.date_descending' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Date, New to Old" {% endunless %},
+      sorting_sale_descending: {% assign temp = 'collections.sorting.sale_descending' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "% Off" {% endunless %},
+      sorting_relevance: {% assign temp = 'collections.sorting.relevance' | t %} {% unless temp contains 'translation missing'  %} {{ temp | json }} {% else %} "Relevance" {% endunless %},
+
+      sale: {{ 'products.product.sale' | t | json }},
+      sold_out: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }},
+      from_price: {{ 'products.product.from' | t | json }},
+      select_options: {{ 'products.product.select_options' | t | json }},
+      add_to_cart: {{ 'products.product.add_to_cart' | t | json}},
+      quick_view: {{ 'products.product.quick_view' | t | json }},
+      add_to_wishlist: {{ 'wishlist.general.add_to_wishlist' | t | json }},
+      added_to_wishlist: {{ 'wishlist.general.added_to_wishlist' | t | json }},
+      wishlist_note: {{ 'wishlist.general.note' | t | json }},
+      view_as: {{ 'collections.toolbar.view_as' | t | json }},
+      grid_view: {{ 'collections.general.grid_view' | t | json }},
+      list_view: {{ 'collections.general.list_view' | t | json }},
+      toolbar_next: {{ 'collections.toolbar.next' | t | json }},
+      toolbar_previous: {{ 'collections.toolbar.previous' | t | json }},
+      toolbar_showing: {{ 'collections.toolbar.showing' | t | json }},
+      toolbar_of: {{ 'collections.toolbar.of' | t | json }}
+    },
+    custom: {
+      products_per_page: {% if product_per_page %} {{ product_per_page | json }} {% else %} 24 {% endif %},
+      products_per_row: {% if section.settings.collection_results_per_row %} {{ section.settings.collection_results_per_row }} {% else %} 4 {% endif %},
+      grid_item_width: {% if grid_item_width %} {{ grid_item_width | json }} {% else %} "col-md-3" {% endif %},
+      image_size: {% if image_size %} {{ image_size  | json }} {% else %} "250x" {% endif %},
+      product_image_border: {% if settings.product_image_border %} {{ settings.product_image_border | json }} {% else %} false  {% endif %},
+      product_image_crop: {% if settings.product_image_crop %} {{ settings.product_image_crop | json }} {% else %} false {% endif %},
+      display_product_reviews: {% if settings.display_product_reviews %} {{ settings.display_product_reviews | json }} {% else %} false {% endif %},
+      display_item_swatch: {% if settings.display_item_swatch %} {{ settings.display_item_swatch | json }} {% else %} false {% endif %},
+      time_lazy_load: {% if settings.time_lazy_load %} {{ settings.time_lazy_load }} {% else %} 100 {% endif %},
+      show_vendor: {% if settings.show_vendor %} {{ settings.show_vendor | json }} {% else %} false {% endif %},
+      enable_quick_view: {% if settings.enable_quick_view %} {{ settings.enable_quick_view | json }} {% else %} false {% endif %},
+      enable_wishlist: {% if settings.enable_wishlist %} {{ settings.enable_wishlist | json }} {% else %} false {% endif %},
+    },
+    customer: {
+      tags: {% if customer.tags%} {{ customer.tags | json }} {% else %} [] {% endif %},
+      email: {% if customer.email %} {{ customer.email | json }} {% else %} '' {% endif %},
+    }
+  };
+</script>

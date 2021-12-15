@@ -1,0 +1,48 @@
+{% if settings.display_popup_newsletter %}
+<div class="wrapper-newsletter halo-modal" data-newsletter data-delay="{{settings.popup_newsletter_delay | times:1000}}">
+    <div class="modal-overlay">
+        <div class="halo-modal-content">
+            <a class="close close-window" title="{{ 'cart.ajax_cart.close' | t }}">
+                {% include 'icon-close' %}
+            </a>
+            <div class="halo-modal-body">
+              <div class="column-left">
+                {%- assign img_url = settings.newsletter | img_url: '2400x' -%}
+                {%- assign img_url_mob = settings.newsletter_mob | img_url: '2400x' -%}
+                <a href="{{ settings.buttonUrl }}" class="virtual-button">
+                  {% if settings.newsletter != blank %}
+                  <img data-src="{{ img_url }}" src="{{ img_url }}" class="lazyautosizes lazyloaded" data-sizes="auto">
+                  {% else %}
+                  <div class="not_img">
+                    360 x 360px
+                  </div>   
+                  {% endif %}
+                  {% if settings.buttonText != blank %}
+                  <span class="btn">{{ settings.buttonText }}</span>
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<style>
+  a.virtual-button {
+    display: block;
+  }
+  .virtual-button span.btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 3px;
+    background: #005272;
+    color: #fff;
+  }
+  @media (min-width:768px){
+    .virtual-button span.btn {
+      bottom: 30px;
+    }
+  }
+</style>

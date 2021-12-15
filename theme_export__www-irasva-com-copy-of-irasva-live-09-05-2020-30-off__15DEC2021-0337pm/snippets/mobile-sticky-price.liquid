@@ -1,0 +1,56 @@
+<div class="price_view mobile-xs">
+  <div class="prices">
+    {% if product.compare_at_price > product.price %}
+    <span class="compare-price">
+      {{ product.compare_at_price_max | money }}
+    </span>
+    <span class="price on-sale" itemprop="price">
+      {{ product.price | money }}
+    </span>
+    {% else %}
+    {% comment %} <span class="price" itemprop="price">
+    {%- capture price -%}{{ product.price | money_without_currency | remove: '.00' }}{%- endcapture -%}
+    {{ 1 | times: product.variants.first.weight_in_unit | times: section.settings.gold_price | times: 100 | money }}
+    </span> {% endcomment %}
+    {%- if product.tags contains "No Customization" -%}
+    <span class="price">{{ product.price | money | remove: '.00' }}</span>
+    {% else %}
+    <span class="price_cal"></span>
+    {% endif %}
+    {% endif %}
+  </div>
+  {% if settings.display_item_size or settings.enable_quick_view %}
+  {%- if product.tags contains "No Customization" -%}
+
+  {%- else -%}
+  <div class="product-des abs-bottom" style="line-height:31px;">
+    {% comment %} {% if settings.display_item_size %}
+    {% include 'items-size' %}
+    {% endif %} {% endcomment %}
+
+    {% if settings.enable_quick_view %}
+    <a class="quickview-button" href="javascript:void(0)" id="{{ product.handle }}" title="{{ 'products.product.quick_view' | t }}" {% if settings.enable_multilang %}data-translate="products.product.quick_view" translate-item="title"{% endif %}>
+      <span {% if settings.enable_multilang %}data-translate="products.product.quick_view"{% endif %}>
+        {{ 'products.product.quick_view' | t }}
+      </span>
+    </a>
+    {% endif %}
+
+    <a class="quickview-button_custome quickview-button" style="cursor:pointer"  id="{{ product.handle }}" title="{{ 'products.product.quick_view' | t }}">
+      <span style="line-height:31px;">
+        {{ 'products.product.quick_view' | t }}
+      </span>
+    </a>
+
+  </div>
+  {%- endif -%}
+  {% endif %}
+
+  <div class="estimate-class mobile-xs">
+    {% if long_shipping %}
+    <span class="estimate_time">ESTIMATED TIME<br>4-5 days for arrival</span>
+    {% else %}
+    <span class="estimate_time">ESTIMATED TIME<br>4-5 days for arrival</span>
+    {% endif %}
+  </div>
+</div>

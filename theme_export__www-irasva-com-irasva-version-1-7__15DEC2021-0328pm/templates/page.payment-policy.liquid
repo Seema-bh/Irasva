@@ -1,0 +1,53 @@
+<div class="page-tpl">
+  <div class="container">
+    {% comment %}
+    {% include 'breadcrumb' %}
+    {% endcomment %}
+
+    <header class="page-header">
+      <h2>
+        {% include 'multilang' with page.title %}
+      </h2>      
+    </header>
+
+    {% comment %}
+    Regular page content goes here.
+    {% endcomment %}
+    <p class="italic-para"><i>We offer multiple payment options, which include Online, Offline, Cash-on-Delivery.</i></p>
+    <br><h6>ONLINE -</h6>
+    <p>Customers can make their purchase payment with Credit Card, Debit card or Online fund transfer.</p> 
+    <p>• Credit Card: All Visa, Master and American Express Credit Cards are accepted </p>
+    <p>• Debit Card: All Visa, Maestro and RuPay Debit Cards are accepted </p>
+    <p>• Online Fund Transfer: You can choose from all major banks in India to transfer money</p>
+    <br>
+     <h6>OFFLINE -</h6>
+     <p>Offline payments can be made with cheque, cash deposit or money transfer through HDFC Bank. Customers making offline payment should contact Irasva on 1800-419-4018 and confirm his/her payment modalities.</p>
+    <br>
+    <h6>CASH ON DELIVERY - </h6>
+    <p>Cash-on-Delivery (COD) is a payment method where you pay for a product in cash, when the courier company delivers it to you. CoD option is available on select pin codes up to Rs.49,000/-. It is not applicable on customised jewellery.</p>
+   
+    {% if settings.enable_multilang and page.content contains '[lang2]' %}
+    <div class="rte lang1">
+      {{ page.content | split: '[lang2]' | first }}
+    </div>
+    <div class="rte lang2">
+      {{ page.content | split: '[lang2]' | last }}
+    </div>
+    {% else %}
+    <div class="rte">
+      {{ page.content | split: '[lang2]' | first }}
+    </div>
+    {% endif %}
+  </div>
+</div>
+<style>
+body#payment-policy h6 {
+    font-family: "argent_cfextra_bold";
+    font-size: 16px;
+    line-height: 27px;
+}
+body#payment-policy p {
+        font-size: 16px;
+    line-height: 27px;
+}
+</style>

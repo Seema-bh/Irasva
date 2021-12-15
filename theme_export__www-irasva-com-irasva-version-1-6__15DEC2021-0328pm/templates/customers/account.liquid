@@ -1,0 +1,112 @@
+{% comment %}
+
+  This template will be automatically generated for you if the file doesn't exist,
+  but where's the fun in having no control? Define your layout below.
+
+  The 'layout settings.customer_layout' line is inserted at the top of every customer account template.
+  Your theme's settings determine to use the 'default' or 'theme' customer templates.
+  More info:
+    - http://www.tetchi.ca/shopify-theme-from-scratch-part-11/
+
+  Template note:
+    - All IDs on this template are required to make the form(s) submit properly
+
+  For all available customer liquid tags:
+    - http://docs.shopify.com/themes/liquid-variables/customer
+
+{% endcomment %}
+
+{% layout settings.customer_layout %}
+
+<div class="container">
+  <div class="account_top_sec_info">
+    <header class="page-header">
+      <h1 {% if settings.enable_multilang %}data-translate="customer.account.title"{%endif%}>{{ 'customer.account.title' | t }}</h1>
+      <!--   	<h5 class="text-uppercase">{{ customer.name }}</h5> -->
+    </header>
+    <div class="log_out_opt">
+      {% if customer %}
+      <h6><a href="/account/logout">LOGOUT</a></h6>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="account-tab text-center">
+    <div class="tab-link">
+      <a class="active" href="javascript:void(0);">PROFILE</a>
+      <a href="/pages/order">ORDERS</a>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <aside class="col-sm-4 personal-info">
+      <h3 class="account-saved">Personal info</h3>
+      <div class="account-personal-info">
+        <p class="name"><b>Name</b><br><span>{{ customer.name }}</span></p>
+        <p class="name"><b>Email Id</b><br><span>{{ customer.email }}</span></p>
+        <p class="name"><b>Location</b><br><span>{{ customer.default_address.city}}{% if customer.default_address.province_code %}, {{customer.default_address.province_code}}{% endif %} {{ customer.default_address.zip}}</span></p>
+        <p class="name"><b>Mobile </b><br><span>{{ customer.default_address.phone }}</span></p>
+      </div>
+      {% comment %}
+      <h4>{{ 'customer.addresses.primary' | t }}</h4>
+      <div class="address note">
+        {% if customer.default_address != nil %}
+        <p>{{ customer.default_address.address1 }}</p>
+        {% if customer.default_address.address2 != "" %}
+        <p>{{ customer.default_address.address2 }}</p>
+        {% endif %}
+        <p>{{ customer.default_address.city}}{% if customer.default_address.province_code %}, {{customer.default_address.province_code}}{% endif %} {{ customer.default_address.zip}}</p>
+        <p>{{customer.default_address.country}}</p>
+        <p>{{ customer.default_address.phone }}</p>
+        {% else %}
+        <p>{{ 'customer.addresses.no_addresses' | t }}</p>
+        {% endif %}
+        <p><a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
+      </div>
+      {% endcomment %}
+
+    </aside>
+    
+    <div class="col-sm-8 saved-address">
+      <!--   order end   -->
+<!--       <header class="page-header">
+        <h4 {% if settings.enable_multilang %}data-translate="customer.account.details"{%endif%}>{{ 'customer.account.details' | t }}</h4>
+      </header> -->
+	  <h3>Saved address</h3>
+      <h4>{{ customer.name }}</h4>
+
+      {% if customer.default_address != nil %}
+      <p>
+        <span class="form-label">Address:</span>{{ customer.default_address.address1 }}<br>
+
+        {% if customer.default_address.city != "" %}
+        <span class="form-label">City: </span>{{ customer.default_address.city }}<br>
+        {% endif %}
+
+        {% if customer.default_address.province_code != "" %}
+        <span class="form-label">State: </span>{{ customer.default_address.province_code | upcase }}<br>
+        {% endif %}
+
+        {% if customer.default_address.zip != "" %}
+        <span class="form-label">Pincode: </span>{{ customer.default_address.zip | upcase }}<br>
+        {% endif %}
+
+        {% if customer.default_address.country != "" %}
+        <span class="form-label">Country: </span>{{ customer.default_address.country }}<br>
+        {% endif %}
+
+        {% if customer.default_address.phone != "" %}
+        <span class="form-label">Phone-No: </span>{{ customer.default_address.phone }}
+        {% endif %}
+
+      </p>
+
+      {% endif %}
+
+      <p class="large--right">
+        <a href="/account/addresses" class="btn yellow_btn" onclick="Shopify.CustomerAddress.toggleNewForm(); return false;">+ Add New Address</a>
+      </p>
+    </div>
+  </div>
+</div>

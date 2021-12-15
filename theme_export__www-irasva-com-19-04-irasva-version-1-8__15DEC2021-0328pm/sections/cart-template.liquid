@@ -1,0 +1,335 @@
+{% include 'breadcrumb' %}
+{% if cart.item_count > 0 %}
+<form action="/cart" class="cart-form wrapper-cart-template" method="post" novalidate>
+    <div class="left-col cart_items">
+        <div class="box-title">
+            <div class="heading">
+                <div class="product-details" {% if settings.enable_multilang %} data-translate="cart.label.product" {%endif%}>
+                    {{ 'cart.label.product' | t }}
+                </div>
+                <div class="price" {% if settings.enable_multilang %} data-translate="cart.label.price" {%endif%}>
+                    {{ 'cart.label.price' | t }}
+                </div>
+            </div>
+        </div>
+        
+        <ul class="cart-list">
+            {% for item in cart.items %}
+            <li data-product_id="{{item.product_id}}">
+                <div class="details">
+                    <div class="cart-thumb">
+                        <a class="product-img" href="{{ item.url | within: collections.all }}">
+                            <img src="{{ item | img_url: '160x' }}" alt="{{ item.title | escape }}" />
+                        </a>
+                    </div>
+                    
+                    <div class="cart-details">
+                        <a href="{{ item.url }}" class="product-name">
+                            {% include 'multilang' with item.product.title %}
+                        </a>
+                        
+                        {% comment %} <div class="size">
+                            {% if item.product.variants.size != 0 %}
+                            {% unless item.variant.title contains 'Default' %}
+                            <small>
+                                {{ item.variant.title }}
+                            </small>
+                            {% endunless %}
+                            {% endif %}
+                        </div> {% endcomment %}
+                         {%- assign gift_wrap = "false" -%}
+                         {%- assign custom_quantity = "1" -%}
+                        <div class="properties">
+                            {%- for p in item.properties -%}
+                             {%- if p.first contains "Gift" and p.last contains "Yes" -%}
+                                    {%- assign gift_wrap = "true" -%}
+                             {% endif %}
+                            {%- unless p.last == blank -%}
+                            {%- if p.first contains "quantity" -%}
+                            {%- capture custom_quantity -%}{{ p.last }}{%- endcapture -%}
+                            {% else %}
+                            <div>
+                                <label class="{{ p.first }}">{{ p.first }}:&nbsp;</label>
+                                {%- if p.last contains '/uploads/' -%}
+                                <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                                {%- else -%}
+                                {{ p.last }}
+                                {%- endif -%}
+                            </div>
+                            {%- endif -%}
+                            
+                            {%- endunless -%}
+                            {%- endfor -%}
+                        </div>
+                        <div class="add_gift">
+                            <input type="checkbox" name="gift" class=" {{gift_wrap}} checkgift gift_{{ item.variant.id }}" value="{{ item.variant.id }}" {%- if gift_wrap contains "true" -%} checked {%- endif -%} >
+                            <label class="gift-label" line_item="{{ forloop.index }}" quantity="{{ item.quantity }}" pro=' {%- for p in item.properties -%}{{p.first}}:{{p.last}},{%- endfor -%}'>Add as a gift</label>
+                        </div>
+                    </div>
+                    <div class="qty-group">
+                            <a class="minus button" data-minus-quantity href="#"></a>
+                            <input type="text" class="custom_qty"  value="{{ custom_quantity }}">
+                            <input type="hidden" class="custom_price" name="updates[]" item_id="{{ item.id }}" id="updates_{{ item.id }}"
+                            value="{{ item.quantity }}" pro=' {%- for p in item.properties -%}{{p.first}}:{{p.last}},{%- endfor -%}' line_item="{{ forloop.index }}">
+                            <a class="plus button" data-plus-quantity href="#"></a>
+                        </div>
+                    <div class="price-box">
+                        <span>
+                            {{ item.line_price | money | remove: '.00' }}
+                        </span>
+                    </div>
+                    
+                    <div class="quantity">  
+                       
+                        {% comment %} <label {% if settings.enable_multilang %} data-translate="cart.label.quantity" {%endif%}>
+                            {{ 'cart.label.quantity' | t }}:
+                        </label>                            {% endcomment %}
+                        <div class="group-action">
+                            {% comment %}
+                            <button class="update btn" name="update" type="submit">
+                                <span class="text" {% if settings.enable_multilang %}
+                                data-translate="cart.general.update" {% endif %}>
+                                {{ 'cart.general.update' | t }}
+                            </span>
+                        </button>
+                        {% endcomment %}
+                        
+                        <a class="" href="/cart/change?line={{ forloop.index }}&amp;quantity=0" data-id="{{ item.id }}">
+                            {% comment %} {% include 'icon-close' %} {% endcomment %}
+                            {% include 'icon-remove' %}
+                            <span class="text text-hover" {% if settings.enable_multilang %}  data-translate="cart.general.remove" {% endif %} style="display:none;">
+                                {{ 'cart.general.remove' | t }}
+                            </span>
+                        </a>
+                        {% include 'iwish_v2' with 'iwishCart' %}                              
+                    </div>
+                </div>  
+            </div>
+        </li>
+          <input class="hike"  type="hidden" value="
+                                                     {%- for p in item.properties -%}
+                                                    {{p.first}}:{{p.last}},
+                                                    {%- endfor -%}
+                                                    ">
+        {% endfor %}
+    </ul>
+    
+    {% if settings.img_trust != blank %}
+    <div class="secure-shopping-guarantee">
+        <div class="secure-text">
+            <span class="icon">
+                <svg aria-hidden="true" class="svg-inline--fa fa-user-shield fa-w-20 fa-2x" data-icon="user-shield"
+                data-prefix="fas" role="img" viewbox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+                <path class=""
+                d="M622.3 271.1l-115.2-45c-4.1-1.6-12.6-3.7-22.2 0l-115.2 45c-10.7 4.2-17.7 14-17.7 24.9 0 111.6 68.7 188.8 132.9 213.9 9.6 3.7 18 1.6 22.2 0C558.4 489.9 640 420.5 640 296c0-10.9-7-20.7-17.7-24.9zM496 462.4V273.3l95.5 37.3c-5.6 87.1-60.9 135.4-95.5 151.8zM224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm96 40c0-2.5.8-4.8 1.1-7.2-2.5-.1-4.9-.8-7.5-.8h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c6.8 0 13.3-1.5 19.2-4-54-42.9-99.2-116.7-99.2-212z"
+                fill="currentColor"></path>
+            </svg>
+        </span>
+        
+        {% include 'multilang' with settings.secure_text %}
+    </div>
+    <img src="{{ settings.img_trust | img_url: '800x' }}">
+</div>
+{% endif %}
+</div>
+
+<div class="right-col">
+    <div class="box-title" {% if settings.enable_multilang %} data-translate="cart.label.order_summary" {%endif%}>
+        {{ 'cart.label.order_summary' | t }}
+    </div>
+    
+    <div class="total">
+        <span class="label">
+            <span {% if settings.enable_multilang %} data-translate="cart.label.total" {% endif %}>
+                {{ 'cart.label.total' | t }}:
+            </span>
+        </span>
+        <span class="price">
+            {{ cart.total_price | money }}
+        </span>
+    </div>
+    {% if section.settings.cart_notes %}
+    <label class="add-comments" for="cartSpecialInstructions">
+        <span {% if settings.enable_multilang %} data-translate="cart.general.label_text" {%endif%}>
+            {{ 'cart.general.label_text' | t }}
+        </span>
+    </label>
+    
+    <textarea class="input-full" id="cartSpecialInstructions" name="note">{{ cart.note }}</textarea>
+    {% endif %}
+    
+    <div class="btn-actions">
+        <input class="btn btn-checkout" type="submit" name="checkout" {% if settings.enable_multilang %}
+        data-translate="cart.general.button_checkout" {% endif %}
+        value="{{ 'cart.general.button_checkout' | t }}">
+        
+        
+        {% if additional_checkout_buttons %}
+        <div>{{ content_for_additional_checkout_buttons }}</div>
+        {% endif %}
+    </div>
+    {% if cart.item_count > 0 %}
+    <a class="continue" href="/collections/all">
+        <span {% if settings.enable_multilang %} data-translate="cart.ajax_cart.continue_shopping" {% endif %}>
+            {{ 'cart.ajax_cart.continue_shopping' | t }}
+        </span>
+    </a>
+    {% endif %}
+    
+    {% unless cart.item_count == 0 %}
+    {% include 'shipping-rates-calculator' %}
+    {% endunless %}
+    <div>
+        <h5 class="help">Need Help?</h5>
+        <p class="help_text">
+            <a href="tel:1800-4194-018">
+                <svg style="vertical-align: bottom; width: 24px;  height: 24px;" viewbox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <style>
+                            .a, .b {
+                                fill: none;
+                            }
+                            
+                            .a {
+                                stroke: #005272;
+                                stroke-linecap: round;
+                                stroke-linejoin: round;
+                                stroke-miterlimit: 10;
+                            }
+                        </style>
+                    </defs><g transform="translate(-22 -836)"><g transform="translate(26.156 840.043)"><path class="a" d="M10.427,8.155a.341.341,0,0,0-.475-.009s-.971.951-1.035,1.01a.2.2,0,0,1-.054.038C7.853,9.706,4.208,5.8,4.9,5.069L5.943,4.052a.342.342,0,0,0,0-.482L2.546.1A.337.337,0,0,0,2.307,0a.345.345,0,0,0-.242.1C.362,1.77-2.368,3.451,4.01,9.957c6.295,6.419,8.1,3.986,9.836,2.119a.341.341,0,0,0-.006-.472Z" transform="translate(0.844 2.716)"></path><path class="a" d="M4.968,4.97A4.8,4.8,0,0,0,0,0" transform="translate(9.258 3.365)"></path><path class="a" d="M7.376,7.378A7.206,7.206,0,0,0,0,0" transform="translate(9.258 0.957)"></path><path class="a" d="M0,.005a2.4,2.4,0,0,1,2.56,2.56" transform="translate(9.258 5.77)"></path></g><rect class="b" height="26" transform="translate(22 836)" width="26"></rect></g>
+                </svg> 1800-4194-018
+            </a>
+        </p>
+        <p class="help_text">
+            <a href="mailto:contact@irasva.com">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512; width: 20px; height: 20px; vertical-align: text-top;" xml:space="preserve"><g><g><path d="M469.333,64H42.667C19.135,64,0,83.135,0,106.667v298.667C0,428.865,19.135,448,42.667,448h426.667    C492.865,448,512,428.865,512,405.333V106.667C512,83.135,492.865,64,469.333,64z M42.667,85.333h426.667    c1.572,0,2.957,0.573,4.432,0.897c-36.939,33.807-159.423,145.859-202.286,184.478c-3.354,3.021-8.76,6.625-15.479,6.625    s-12.125-3.604-15.49-6.635C197.652,232.085,75.161,120.027,38.228,86.232C39.706,85.908,41.094,85.333,42.667,85.333z     M21.333,405.333V106.667c0-2.09,0.63-3.986,1.194-5.896c28.272,25.876,113.736,104.06,169.152,154.453    C136.443,302.671,50.957,383.719,22.46,410.893C21.957,409.079,21.333,407.305,21.333,405.333z M469.333,426.667H42.667    c-1.704,0-3.219-0.594-4.81-0.974c29.447-28.072,115.477-109.586,169.742-156.009c7.074,6.417,13.536,12.268,18.63,16.858    c8.792,7.938,19.083,12.125,29.771,12.125s20.979-4.188,29.76-12.115c5.096-4.592,11.563-10.448,18.641-16.868    c54.268,46.418,140.286,127.926,169.742,156.009C472.552,426.073,471.039,426.667,469.333,426.667z M490.667,405.333    c0,1.971-0.624,3.746-1.126,5.56c-28.508-27.188-113.984-108.227-169.219-155.668c55.418-50.393,140.869-128.57,169.151-154.456    c0.564,1.91,1.194,3.807,1.194,5.897V405.333z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                </svg>contact@irasva.com
+            </a>
+        </p>
+        <p class="para_text">
+            <i>The final weight may vary and the price maybe adjusted accordingly.</i>
+        </p>
+    </div>
+</div>
+</form>
+
+{% else %}
+<p class="alert alert-warning" {% if settings.enable_multilang %} data-translate="cart.general.empty" {%endif%}>
+    {{ 'cart.general.empty' | t }}
+</p>
+<p class="cart-empty" {% if settings.enable_multilang %} data-translate="cart.general.continue_browsing_html" {%endif%}>
+    {{ 'cart.general.continue_browsing_html' | t }}
+</p>
+{% endif %}
+
+{% schema %}
+{
+    "name": "Cart Page",
+    "settings": [
+    {
+        "type": "checkbox",
+        "id": "cart_notes",
+        "label": "Allow customers to add notes to their order?",
+        "default": true,
+        "info": "Only enabled in the ajax cart if you use your cart.liquid markup. See docs below."
+    }
+    ]
+}
+{% endschema %}
+
+<style>
+input.custom_qty {
+    text-align: center;
+}
+</style>
+
+<script>
+//   var custom_quantity = "{{custom_quantity}}";
+//   console.log("custom_quantity",custom_quantity);
+
+$(".hike").each(function() {
+	console.log("item_id",$(this).val()); 
+});
+  
+  
+  $(".gift-label").click(function(){
+    var abc =  $(this).attr("pro").split(","),
+    line_item = $(this).attr("line_item"),
+    qty = $(this).attr("quantity");
+    
+var data = {
+    quantity: qty,
+    line: line_item,
+     properties: ''
+   }
+  var tempProperties = {};
+  console.log("abc---==",abc);
+  if(abc.indexOf("Gift:Yes") == -1){
+      $(this).siblings("input").attr("checked","");
+  for (var i in abc){
+   console.log(abc[i],"hihiihihihhi");
+   if(abc[i] == ""){
+       console.log("koool");
+       tempProperties["Gift"] = "Yes";
+   }else{
+   var afg = abc[i].split(':'),
+   afgone = afg[0],
+   afgtwo = afg[1];
+
+    tempProperties[afgone] = afgtwo;
+   }
+    console.log(tempProperties,"tea");
+  }
+  }else{
+       $(this).siblings("input").removeAttr("checked","");
+       for (var i in abc){
+   console.log(abc[i],"hihiihihihhi");
+   if(abc[i] == "Gift:Yes"){
+       console.log("koool");
+       tempProperties["Gift"] = "";
+   }else{
+   var afg = abc[i].split(':'),
+   afgone = afg[0],
+   afgtwo = afg[1];
+
+    tempProperties[afgone] = afgtwo;
+   }
+    console.log(tempProperties,"tea");
+  }
+  }
+  data.properties = tempProperties;
+    console.log("abcs",data);
+      $.ajax({
+        type: "POST",
+        url: "/cart/change.js", 
+        data: data, 
+        dataType: "json",
+
+        beforeSend: function () {
+//           ella.showLoading();
+        },
+
+        success: function () {
+         console.log(data,"succes");
+         location.reload();
+        },
+
+        error: function () {
+          console.log(data,"Errro");
+        }
+      });
+ 
+    
+   });
+   $.getJSON("/cart.json", function(cart) {
+      $.each(cart.items, function(ci, item) {
+        console.log("item.properties.Gift",item.properties.Gift);
+        if (item.properties.Gift != "Yes") {
+         
+          //$(".gift_" + item.variant_id).attr("checked","");
+         
+        }
+      });
+    });
+</script>

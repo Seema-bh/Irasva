@@ -1,0 +1,71 @@
+<div class="row hrd">
+  <div class="col-sm-6">
+    <h2>{{ section.settings.title }}</h2>
+    {{ section.settings.description }}
+    <a class="btn hbd-btn" href="{{ section.settings.link }}" target="_blank">{{ section.settings.button }}</a>
+  </div>
+  <div class="col-sm-6">
+	<img src="{{ section.settings.image | img_url:"1000x" }}" />
+  </div>
+</div>
+<style>
+  .hrd h2{
+  	margin-bottom:15px;
+  }
+  .hrd h2,.hrd p{
+    text-align:center;
+    color: #005274;
+  }
+  .hrd .col-sm-6:first-child{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  .hbd-btn{
+    border: 2px solid #005274;
+    color: #005274;
+    margin-top: 20px;
+    margin: 20px auto 20px;
+    text-align: center;
+    display: inline-block;
+  }
+</style>
+{% schema %}
+  {
+    "name": "HBD",
+    "settings": [
+		{
+          "type" : "textarea",
+          "id" : "title",
+          "label" : "Title"
+        },
+		{
+          "type" : "textarea",
+          "id" : "description",
+          "label" : "Description"
+        },
+		{
+          "type" : "text",
+          "id" : "button",
+          "label" : "button label"
+        },
+		{
+          "type" : "url",
+          "id" : "link",
+          "label" : "button link"
+        },
+		{
+          "type" : "image_picker",
+          "id" : "image",
+          "label" : "Image"
+        }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

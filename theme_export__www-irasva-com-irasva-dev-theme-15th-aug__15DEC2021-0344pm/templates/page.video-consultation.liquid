@@ -1,0 +1,88 @@
+
+<div class="page-tpl">
+  <div class="container">
+    <img src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/video_cunsult1.jpg?v=1590472668" style="border-radius:0">
+    <img src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/video_cunsult1mobile_v.jpg?v=1590472667" style="border-radius:0;display:none;">
+  </div>
+</div>
+<div class="container page-verbiage">
+  <p>To book an appointment, call or whatsapp on <a href="https://wa.me/919324140495" target="_blank">+91 9324140495</a> or fill the form below with your details and we will reach out to you.</p>
+</div>
+<style>
+  .jotform-form {
+    padding: 0 10px;
+  }
+  .page-tpl img{
+  	width:100%;
+  }
+  .page-verbiage p{
+    padding: 60px 100px;
+    font-size: 34px;
+    line-height: 120%;
+  }
+  @media (max-width:767px){
+    .page-tpl .container img:first-child{
+      display:none;
+    }
+    .page-tpl .container img:last-child{
+      display:block !important;
+    }
+  }
+  .video-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 42.25%;
+    height: auto;
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+  .video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .mobile-video-wrapper{
+    display:none;
+  }
+  @media (max-width:1024px){
+    .video-wrapper {
+      padding-bottom: 56.6%;
+    }
+  }
+  @media (max-width:767px){
+    .mobile-video-wrapper{
+      display:block;
+      padding:0 10px;
+    }
+    .desktop-video-wrapper{
+      display:none;
+    }
+  }
+</style>
+{% include 'jotform' %}
+  
+  <div class="video-wrapper desktop-video-wrapper">
+    <video width="320" height="240" poster="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/Irasva.jpg?v=1593411467" controls>
+      <source src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/Irasva-HighRes-Horizontal.mp4?v=1593410618" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="mobile-video-wrapper">
+    <video width="100%" height="550px" controls>
+      <source src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/IrasvaHighResVertical.mp4?v=1593457924" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+<script>
+  var getVideoProduct =  localStorage.getItem("videoProduct");
+  console.log(getVideoProduct);
+  if(getVideoProduct != null && getVideoProduct != undefined){
+    document.getElementById("id_17").style.display = "none";
+    document.getElementById("id_19").style.display = "none";
+    document.getElementById("input_15").value = getVideoProduct;
+  }else{
+    document.getElementById("id_15").style.display = "none";
+  }
+</script>

@@ -1,0 +1,48 @@
+<div class="page-tpl">
+  <div class="container">
+    {% include 'breadcrumb' %}
+
+    <header class="page-header">
+      <h2>
+        {% include 'multilang' with page.title %}
+      </h2>      
+    </header>
+
+    {% comment %}
+    Regular page content goes here.
+    {% endcomment %}
+
+    <div class="rte">
+      {{ page.content | split: '[lang2]' | first }}
+    </div>
+    <div class="sitemap-page">
+      <div class="main-menu">
+        <ul class="level-parent">
+          {% for mainlink in linklists["main-menu"].links %}
+          <li class="level-1">
+            <a href="{{ mainlink.url }}">{{ mainlink.title }}</a>
+            {% if linklists[mainlink.handle] != empty %}
+            <ul>
+              {% for childlink in linklists[mainlink.handle]links %}
+              <li class="level-2">
+                <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                {% if linklists[mainlink.handle] != empty %}
+                <ul>
+                  {% for childchildlink in linklists[childlink.handle]links %}
+                  <li class="level-3">
+                    <a href="{{ childchildlink.url }}">{{ childchildlink.title }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

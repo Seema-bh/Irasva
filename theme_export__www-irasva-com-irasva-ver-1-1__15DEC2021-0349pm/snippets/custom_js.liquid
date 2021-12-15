@@ -1,0 +1,326 @@
+{% include "price_break" %}
+<style>
+  .product-photo-container .slick-current{
+    opacity:2 !Important;
+    z-index: 1000 !Important;
+  }
+</style>
+
+<script> 
+  var estimate_shipping = "Estimated delivery: Up to 15 working days."; 
+  {% include "size_json" %}
+  if (cart == "") {
+    var cart = "{{ product.variants[0].title }}";
+  }
+  $.each(diamond_json.diamond, function(ind, obj) {
+    var ind = ind; 
+    var diamond_type = $("select#diamond_type option:selected").val();
+    var diamond_type_c = diamond_type+"|"+diamond_json.diamond[ind].type;
+    var diamond_type_c = diamond_type_c.toUpperCase();
+//     console.log("diamond_type_c",diamond_type_c);
+    $.ajax({
+      type: "GET", 
+      url: "https://cdn.shopify.com/s/files/1/0312/7689/2298/files/Diamond_price_26_nov.csv",
+      dataType: "text",
+      async: false,
+      success: function(data) {processsData(ind,diamond_type_c,data);}
+    });
+  });
+  $(".quickview-button_custome").click(function() {
+    $(".custom_price_break,.overlay_custom").show();
+  }); 
+  $(".overlay_custom,.custom_close").click(function(){
+    $("html.js").css("overflow","scroll");
+    $(".custom_price_break,.overlay_custom").hide();
+  });
+  $( "#diamond_type" ).change(function() {
+    $('.estimate-class .estimate_time').text(estimate_shipping);
+    $(".custo_diamond_type").remove();
+    var diamond_type = $("select#diamond_type option:selected").val();
+    $.cookie('diamond_price_json', '0', { expires: 1, path: '/'  });
+    $.cookie('compare_diamond_json_price', '0', { expires: 1, path: '/'  });
+    $.each(diamond_json.diamond, function(ind, obj) {
+      var ind = ind; 
+      var diamond_type_c = diamond_type+"|"+diamond_json.diamond[ind].type;
+      var diamond_type_c = diamond_type_c.toUpperCase();
+      $.ajax({
+        type: "GET",
+        url: "https://cdn.shopify.com/s/files/1/0312/7689/2298/files/Diamond_price_26_nov.csv?v=1587289061",
+        dataType: "text",
+        async: false,
+        success: function(data) {processsData(ind,diamond_type_c,data);}
+      });
+    });
+  });
+  function processsData(ind,diamond_type_c,allTeext) {
+    var allTextLines = allTeext.split(/\r\n|\n/);
+    var headers = allTextLines[0].split(',');
+    var diamond_price_json = Cookies.get("diamond_price_json");
+    var compare_diamond_json_price = Cookies.get("compare_diamond_json_price"); 
+    // if( diamond_json.diamond[ind].type == '' || ind == 9 ){  
+    var diamond_type = (diamond_type_c).split("|");
+    $(".diamond_type").html(diamond_type[0]);
+    $("#diamond_type").attr("type",diamond_type[0]);
+    $(".diamond_carte").html(diamond_carat+" CT  ");
+
+    for (var i=1; i<allTextLines.length; i++) { 
+      var data = allTextLines[i].split(',');
+      if( diamond_json.diamond[ind].type == '' || ind == 9 ){  
+        price(diamond_price_json,compare_diamond_json_price); break; }
+      for (var j=0; j<headers.length; j++) {
+        if( headers[j] == 'QualityMaster'){
+          var compareee = data[j];
+          var comparee = compareee.toUpperCase();
+          if(comparee == diamond_type_c ){
+//             console.log(diamond_type_c,"compareeecompareeecompareee=--",compareee);
+            j++; var diamond_type_price = data[j];
+            j++; var compare_diamond_type_price = data[j]; 
+            var diamon_all_price = diamond_type_price * diamond_json.diamond[ind].caret_ratio; 
+            var compare_diamond_all_price = compare_diamond_type_price * diamond_carat;
+            compare_diamond_json_price = parseInt(compare_diamond_all_price);
+            var diamond_type = (diamond_type_c).split("|");
+            diamond_price_json = parseInt(diamond_price_json) + parseInt(diamon_all_price);
+            $.cookie('diamond_price_json', diamond_price_json, { expires: 1, path: '/'  });
+            $.cookie('compare_diamond_json_price', compare_diamond_json_price, { expires: 1, path: '/'  });
+            $(".custom_dimond").remove();
+            $("tr.custo_diamond").before(' <tr class="custo_diamond_type"><td >'+(diamond_type[0]+' '+diamond_type[1]).replace("|"," ").replace("|"," ")+'</td> <td style="text-align: center;">₹ '+diamond_type_price+'</td> <td style="text-align: center;">'+ diamond_json.diamond[ind].caret_ratio +' CT</td> <td style="text-align: center;">₹ '+parseInt(diamon_all_price)+'</td></tr>');
+            return false;
+          }
+        }
+      }
+
+    }
+    if( diamond_json.diamond[ind].type == '' || ind == 9 ){
+      return false;
+    }
+  }
+  function price(diamond_price_json,compare_diamond_json_price){
+    var sizes = $('#ring_size_custom input[type="radio"]').val();
+    var sizes = $( "#select_size option:selected" ).val();
+    if(ring_size != undefined){
+      $.each(json.Rings, function(i, obj) {
+
+        if (sizes != undefined){
+          if(sizes.indexOf(json.Rings[i].size) != -1){
+            var size_ratio = json.Rings[i].Ratio;
+            $.cookie('size_ratio', size_ratio, { expires: 1, path: '/'  });
+          }
+        }
+      });
+    }
+    var cart = $( "#metal option:selected" ).val(),
+        carte_color = $( ".variant-swatch.cust_checked" ).attr('title');
+    //                               $(".slider-nav .item img").each(function() {
+    //                               var alt = $(this).attr("alt");
+    //                              //   console.log("alt",alt);
+    //                                 if(cart != undefined){
+    //                               if (cart.indexOf(alt) != -1) {
+    //                               $(this).parents(".item").show();
+    //                               alt = alt.toLowerCase().replace(/ /g,'-');
+    //                               $(".thumb").removeClass("slick-current");
+    //                               $("#"+alt).addClass("slick-current");
+    //                               }else{
+    //                               $(this).parents(".item").hide(); 
+    //                               }
+    //                                 }
+    //                               });
+    $(".gold_carte_color").html(cart);
+    if (cart != undefined){
+      if (cart.indexOf("14K") != -1) { 
+        var caret_ratio = 0.58;
+        $.cookie('caret_ratio', caret_ratio, { expires: 1, path: '/'  });
+      } else if (cart.indexOf("18K") != -1) {
+        var caret_ratio = 0.75;
+        $.cookie('caret_ratio', caret_ratio, { expires: 1, path: '/'  });
+      }
+    }
+    var size_ratio = Cookies.get("size_ratio");
+    var caret_ratio = Cookies.get("caret_ratio");
+    var meta_d_price =  parseInt(diamond_price_json);
+    console.log(gold_price);
+    if(caret_ratio != undefined && size_ratio != undefined &&  meta_d_price != undefined){
+      priceess = (gold_price * caret_ratio * parseFloat(weight * size_ratio).toFixed(2)) ;
+      var gold_total_price = priceess;
+      var priceess = Math.round(priceess) + meta_d_price;
+    }else if(size_ratio != undefined && caret_ratio != undefined){
+      priceess = (gold_price * caret_ratio * parseFloat(weight * size_ratio).toFixed(2));
+      var gold_total_price = priceess;
+    }else if(caret_ratio != undefined && meta_d_price != undefined){
+      priceess = gold_price * weight * caret_ratio ;
+      var gold_total_price = priceess;
+      var priceess = Math.round(priceess) + meta_d_price;
+    }else if(size_ratio != undefined && meta_d_price != undefined){
+      priceess = (gold_price * parseFloat(weight * size_ratio).toFixed(2)) ;
+      var gold_total_price = priceess;
+      var priceess = Math.round(priceess) + meta_d_price;
+    } else if(meta_d_price != undefined){
+      priceess = gold_price * weight ;
+      var gold_total_price = priceess;
+      var priceess = Math.round(priceess) + meta_d_price;
+    }else if(size_ratio != undefined){
+      priceess = (gold_price * parseFloat(weight * size_ratio).toFixed(2));
+      var gold_total_price = priceess;
+    }else if(caret_ratio != undefined){
+      priceess = gold_price * weight * caret_ratio;
+      var gold_total_price = priceess;
+    }
+    else{
+      priceess = gold_price * weight ;
+      var gold_total_price = priceess;
+    }
+    
+    
+
+    var gold_caret_rate = gold_price * caret_ratio;
+    $(".gold_caret_rate").html("₹ "+gold_caret_rate);
+    var weightt = parseFloat(weight * size_ratio);
+    $(".gold_weight").html(weightt.toFixed(2) );
+    $(".gold_final_rate").html("₹ "+ Math.round(gold_caret_rate * weightt ) );
+    $(".gold_price").html("₹ " + parseInt(gold_total_price)); 
+    $(".making_charges").html("₹ " + makig_charges);
+    $(".compare_making_charges").html("₹ " + compare_makig_charges);
+    $(".compare_diamond_price").html("₹ " + compare_diamond_json_price);
+    $(".diamond_price").html("₹ " + diamond_price_json);
+    //$("."+pro_id+" .pr_g_price_cal").html("₹ " + parseInt(priceess));
+    var price_cal_tot = Math.round(priceess) + Math.round(makig_charges);
+
+    $(".price_cal_tot").html("<sup>₹</sup> " + price_cal_tot);
+    var tax_rate = (price_cal_tot / 100)*3;
+    $(".tax_rate").html("<sup>₹</sup> " + Math.round(tax_rate));
+    var grand_total = Math.round(priceess) + Math.round(tax_rate);
+    if(makig_charges != ''){
+      grand_total = Math.round(grand_total) + Math.round(makig_charges);  
+    }
+    $(".grand_total").html("<sup>₹</sup> " + grand_total);
+    //$(".price_cal").html("<sup>₹</sup> " + parseInt(grand_total));
+    $(".price_cal").attr("price",grand_total);
+    grand_total = grand_total + "00";
+    $(".price_cal").html(Shopify.formatMoney(grand_total, window.money_format).replace(".00",""));
+
+
+  }
+  $('#metal').on('change', function() {
+    // var cart = $('input:checked').val();
+    $('.estimate-class .estimate_time').text(estimate_shipping);
+    var cart = $( "#metal option:selected" ).val(),
+        carte_color = $(this).attr('title');
+    $(".gold_carte_color").html(cart);
+    if (cart.indexOf("14K") != -1) { 
+      var caret_ratio = 0.58;
+      $.cookie('caret_ratio', caret_ratio, { expires: 1, path: '/'  });
+    } else if (cart.indexOf("18K") != -1) {
+      var caret_ratio = 0.75;
+      $.cookie('caret_ratio', caret_ratio, { expires: 1, path: '/'  });
+    }
+    //   $(".slider-nav .item img").each(function() {
+    //     var alt = $(this).attr("alt");
+    //      if(cart != undefined){
+    //     if (cart.indexOf(alt) != -1) {
+    //       $(this).parents(".item").show();
+    //         alt = alt.toLowerCase().replace(/ /g,'-');
+    //     $(".thumb").removeClass("slick-current");
+    //     $("#"+alt).addClass("slick-current");
+    //     }else{
+    //       $(this).parents(".item").hide(); 
+    //     }
+    //      }
+    // }); 
+    click_price();
+  });
+  $('#select_size').on('change', function() {
+    // var sizes = $(this).val();
+    $('.estimate-class .estimate_time').text(estimate_shipping);
+    var sizes = $( "#select_size option:selected" ).val();
+    $.each(json.Rings, function(i, obj) {
+      if(sizes.indexOf(json.Rings[i].size) != -1){
+        var size_ratio = json.Rings[i].Ratio;
+        $.cookie('size_ratio', size_ratio, { expires: 1, path: '/'  });
+
+      }
+    });
+    click_price();
+  });
+
+
+  function click_price(){
+    var size_ratio = Cookies.get("size_ratio");
+    var caret_ratio = Cookies.get("caret_ratio");
+    var meta_d_price = parseInt(Cookies.get("diamond_price_json"));
+    var gold_total_price,priceess;
+    if(caret_ratio != undefined && size_ratio != undefined &&  meta_d_price != undefined){
+      priceess = gold_price * caret_ratio * parseFloat(weight * size_ratio).toFixed(2) ;
+      gold_total_price = priceess;
+      priceess = Math.round(priceess) + meta_d_price;
+    }else if(size_ratio != undefined && caret_ratio != undefined){
+      priceess = (gold_price * caret_ratio * parseFloat(weight * size_ratio).toFixed(2));
+      gold_total_price = priceess;
+    }else if(caret_ratio != undefined && meta_d_price != undefined){
+      priceess = gold_price * weight * caret_ratio ;
+      gold_total_price = priceess;
+      priceess = Math.round(priceess) + meta_d_price;
+    }else if(size_ratio != undefined && meta_d_price != undefined){
+      priceess = (gold_price * parseFloat(weight * size_ratio).toFixed(2)) ;
+      gold_total_price = priceess;
+      priceess = Math.round(priceess) + meta_d_price;
+    } else if(meta_d_price != undefined){
+      priceess = gold_price * weight ;
+      gold_total_price = priceess;
+      priceess = Math.round(priceess) + meta_d_price;
+    }else if(size_ratio != undefined){
+      priceess = (gold_price * parseFloat(weight * size_ratio).toFixed(2));
+      gold_total_price = priceess;
+    }else if(caret_ratio != undefined){
+      priceess = gold_price * weight * caret_ratio;
+      gold_total_price = priceess;
+    }
+    else{
+      priceess = gold_price * weight ;
+      var gold_total_price = priceess;
+    }
+
+    var gold_caret_rate = gold_price * caret_ratio;
+    $(".gold_caret_rate").html("₹ "+gold_price * caret_ratio);
+    var weightt = parseFloat(weight * size_ratio);
+    $(".gold_weight").html(weightt.toFixed(2));
+    $(".gold_final_rate").html("₹ "+ Math.round(gold_caret_rate * weightt) );
+    $(".gold_price").html("₹ " + parseInt(gold_total_price)); 
+    //$("."+pro_id+" .pr_g_price_cal").html("₹ " + parseInt(priceess));
+    var price_cal_tot = Math.round(priceess) + Math.round(makig_charges);
+    $(".price_cal_tot").html("<sup>₹</sup> " + parseInt(price_cal_tot)); 
+    var tax_rate = (price_cal_tot / 100)*3;
+    $(".tax_rate").html("<sup>₹</sup> " + Math.round(tax_rate));
+    var grand_total = Math.round(priceess) + Math.round(tax_rate);
+    if(makig_charges != ''){
+      grand_total = Math.round(grand_total) + Math.round(makig_charges);  
+    }
+    $(".grand_total").html("<sup>₹</sup>" + grand_total);
+    $(".price_cal").attr("price",grand_total);
+    grand_total = grand_total + "00";
+    $(".price_cal").html(Shopify.formatMoney(grand_total, window.money_format).replace(".00",""));
+
+  } 
+  
+  var FirstVariant = parseInt({{ product.selected_or_first_available_variant.price }})/100;
+  var calculatedFirstVariant = parseInt($("#log_price").attr('price'));
+  var priceDifference = FirstVariant-calculatedFirstVariant;
+  console.log(FirstVariant,calculatedFirstVariant,priceDifference);
+  if(priceDifference<0){
+    priceDifference *= -1
+  }
+  console.log(priceDifference);
+  if((priceDifference)>20){
+    location.reload();
+  }
+
+
+
+  // Swatch
+  $(".cust_swatch .variant-swatch").click(function(){
+    if($(this).hasClass( "cust_checked" )){
+      $(this).siblings().removeClass("cust_checked");
+    }else{
+      $(this).addClass("cust_checked");
+      $(this).siblings().removeClass("cust_checked");
+    }
+  });
+</script>

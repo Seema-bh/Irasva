@@ -1,0 +1,147 @@
+<header class="collection-header collection-header-sections">
+
+  {% if section.settings.collection_image != blank %}
+  {%- assign img_url = section.settings.collection_image | img_url: 'master' -%}
+  {% elsif collection.image %}
+  {%- assign img_url = collection.image | img_url: 'master' -%}
+  {% elsif collection.image %}
+  {%- assign img_url = "https://cdn.shopify.com/s/files/1/0312/7689/2298/files/All_jewellery.png?v=1587280008" -%}
+  {% endif %}
+
+  {% if collection.metafields.collection['desktopBanner'] != blank %}
+  {%- assign img_url = collection.metafields.collection['desktopBanner'] -%}
+  {% endif %}
+
+  <div class="collection-image">
+    {% if img_url != blank %}
+    <img data-src="{{ img_url }}" src="{{ img_url }}" class="lazyautosizes lazyloaded visible-xs" data-sizes="auto">
+    {% include 'mobile-collection-image', id:collection.handle %}
+    {% else %}
+    <div class="not_img">
+      1880 x 240px
+    </div>
+    {% endif %}   
+    {% if collection.handle contains 'enchanted-disney' %}
+
+    {% else %}
+    <div class="page-header">
+      <h1>
+        {% include 'multilang' with collection.title %}
+      </h1>
+      {% if collection.description != '' and section.settings.display_collection_des %}
+      <div class="collection-des">
+        {{ collection.description }}
+      </div>      
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</header>
+
+<style>  
+  .collection-header-sections img {
+    max-height: {{ section.settings.height_img }};
+  }
+
+  {% if section.settings.display_collection_image %} 
+  .collection-header-sections .page-header h1 {
+    color: #1A1818;
+    margin:0;
+  }
+  {% endif %}
+  
+  @media (max-width: 767px) {
+    .collection-header-sections .page-header p {
+      letter-spacing: 0;
+    }
+  }
+  @media (min-width: 1200px) {
+    {% if section.settings.display_collection_image %} 
+    .collection-header-sections .collection-des {
+      color: {{ section.settings.color_wrapper }};
+    }
+
+    .collection-header.collection-header-sections {
+      position: relative;
+    }
+
+    .collection-header.collection-header-sections .collection-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -moz-transform: translate(-50%, -50%);
+      -o-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+      margin: 0;
+    }
+
+    .collection-header.collection-header-sections .collection-image {
+      margin-bottom: 1px;
+    }
+
+    {% else %}
+    .collection-template .reverse-mb {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-direction: column-reverse;
+      -moz-flex-direction: column-reverse;
+      -ms-flex-direction: column-reverse;
+      flex-direction: column-reverse;
+    }    
+    {% endif %}
+  }
+
+  @media (min-width: 768px) and (max-width: 1199px) {
+    {% if section.settings.display_collection_image %}
+    .collection-header.collection-header-sections .collection-wrapper h1 {
+      display: none !important;
+    }
+    {% endif %}
+  }
+</style>
+
+{% schema %}
+{
+"name": "Collection Header",
+"settings": [
+{
+"type": "checkbox",
+"id": "display_collection_image",
+"label": "Show collection image?",
+"default": true
+},
+{
+"type": "image_picker",
+"id": "collection_image",
+"label": "Image Category",
+"info": "This image will show up when you don't add image in Collections Description"
+},
+{
+"type": "checkbox",
+"id": "display_collection_des",
+"label": "Display Collections Description?",
+"default": true
+},
+{
+"type" : "color",
+"id" : "color_wrapper",
+"label" : "Color Wrapper",
+"default" : "#fff"
+},
+{
+"type" : "text",
+"id" : "height_img",
+"label" : "Image height",
+"default" : "240px"
+}
+]
+}
+{% endschema %}

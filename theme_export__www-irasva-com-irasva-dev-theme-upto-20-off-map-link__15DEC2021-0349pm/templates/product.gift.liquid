@@ -1,0 +1,54 @@
+<div class="product-template product-template-default">
+  <div class="container">
+    {% if collection %}
+    <div class="next_prev-groups">
+      {% include 'breadcrumb' %}
+      {% include 'next-prev-product' %} 	
+    </div>
+    
+    {% else %}
+    {% include 'breadcrumb' %}
+    {% endif %}
+  	   
+    <div class="halo-product-content">
+      <div class="row pro-page">
+        {% section 'sidebar-section' %}
+        
+        {% section 'product-template-default-custom' %}
+        
+        <!--         {% section 'gift-spotlight-slide' %} -->
+        
+        {% section 'home-custom-block-baner' %}
+        
+      </div>
+      {% comment %}
+      {% section 'home-brands-pdp' %}
+      {% endcomment %}
+      {% section 'recently-viewed-products' %}
+    </div>   
+  </div>
+</div>
+<style>
+  @media (max-width:767px){
+    .button-quantity-wrapper{
+      display:flex;
+      align-items: flex-end;
+    }
+    .product-template .product_top .product-shop .groups-btn {
+      display: block;
+      width:60%;
+    }
+    .product-template .product_top .product-shop .groups-btn #product-add-to-cart {
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+      text-align: center;
+      font-size: 14px;
+      height: 40px;
+      border-radius: 5px;
+    }
+  }
+  .short-description .know_more{
+    display: none;
+  }
+</style>

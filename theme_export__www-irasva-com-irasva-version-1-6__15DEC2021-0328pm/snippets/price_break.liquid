@@ -1,0 +1,163 @@
+
+<div class="overlay_custom"></div>
+<div class="custom_price_break row quickview-tpl" data-collections-related="/collections/{{collection.handle}}?view=related">
+    <button type="button" class="custom_close">&times;</button>
+        <h2 class="product-title quick-view">
+            <a href="{{product.url}}">
+                {% include 'multilang' with product.title %} ( Price Breakdown )
+            </a>     
+        </h2>
+        <div class="quick_box">
+    <div class="col-md-6 product-photos" data-more-view-product-qv>
+        <div class="product-img-box">
+            <div class="product-photo-container slider-for quickview-featured-image">
+                {% for image in product.images %}
+                <div class="thumb">
+                    <a data-zoom rel="gallery1" href="{{ image | product_img_url: 'original'}}" data-fancybox="images-quickview">
+                        <img id="qv-product-featured-image-{{ image.id }}" src="{{ image | product_img_url: 'original' }}" alt="{{ image.alt | escape }}" />
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {%- comment -%}
+            <div class="slider-nav" data-rows="4">
+                {% for image in product.images %}
+                <div class="item">
+                    <a href="javascript:void(0)" data-image="{{ image.src | product_img_url: 'original' }}" data-zoom-image="{{ image.src | product_img_url: 'original' }}">
+                        <img src="{{ image.src | product_img_url: 'compact' }}" alt="{{ image.alt | escape }}">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {%- endcomment -%}
+            
+            {% if on_sale or sold_out or custom_label %}
+            <div class="product-label">
+                {% if on_sale %}
+                {% if settings.type_label_sale == 'label_sale' %}
+                <strong class="label sale-label" {% if settings.enable_multilang %}data-translate="products.product.sale"{% endif %}>
+                  {{ 'products.product.sale' | t }}
+                </strong>
+                {% else %}
+                <strong class="label sale-label">
+                  -{{ product.variants[0].compare_at_price | minus:product.variants[0].price | times:100 | divided_by:product.variants[0].compare_at_price | money_without_currency | times: 100 | replace: '.0', '' }}%
+                </strong>
+                {% endif %}
+                <br>
+                {% endif %}
+                {% if sold_out %}
+                <strong class="label sold-out-label" {% if settings.enable_multilang %}data-translate="products.product.sold_out"{% endif %}>
+                    {{ 'products.product.sold_out' | t }}
+                </strong>
+                <br>
+                {% endif %}
+
+                {% if custom_label %}
+                <strong class="label custom-label" {% if settings.enable_multilang %}data-translate="products.product.custom_label"{% endif %} >
+                    {{ 'products.product.custom_label' | t }}
+                </strong>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>    
+    </div>
+    
+    <div class="col-md-6 product-shop">      
+        {% if settings.qv_display_product_reviews or settings.qv_show_sold_in %} 
+        <div class="group_item">
+            {% if settings.qv_show_sold_in %}
+            <div data-soldOut-product class="sold_product" data-items="{{ settings.qv_item_prd }}" data-hours="{{ settings.qv_hours_prs }}">
+                <span class="items-count">2</span>
+                {% include 'multilang' with settings.qv_item_prds %}
+                <span class="hours-num">8</span>
+                {% include 'multilang' with settings.qv_item_hours %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+        <div class="price_breakdown">
+            <table cellpadding="0" cellspacing="0">
+            <tbody>
+                <tr style="background: #f7f7f7;">
+                <th>COMPONET</th>
+                <th style="text-align: center;">RATE</th>
+                <th style="text-align: center;">WEIGHT</th>
+                <th style="text-align: center;">FINAL VALUE</th>
+            </tr>
+            <tr>
+                <td colspan="4" style="font-weight: 700">Gold</td>
+            </tr>
+                <tr style="background: #f7f7f7;">
+                <td class="gold_carte_color">18K Yellow</td>
+                <td class="gold_caret_rate" style="text-align: center;"></td>
+                <td class="gold_weight" style="text-align: center;"></td>
+                <td class='gold_final_rate' style="text-align: center;"></td>
+            </tr>
+                <tr class="diamond_custom">
+                <td colspan="4" style="font-weight: 700" >Diamond</td>
+            </tr>
+            <tr class="custo_diamond"></tr>
+                <tr>
+                <td></td>
+                <td></td>
+                <td style="background: #f7f7f7;text-align: center;">Making Charges</td>
+                <td style="background: #f7f7f7;text-align: center;" class="making_charges"></td>
+            </tr>
+                <tr>
+                <td></td>
+                <td></td>
+                <td style="background: #f7f7f7;text-align: center;">Sub Total</td>
+                <td style="background: #f7f7f7;text-align: center;" class="price_cal_tot"></td>
+            </tr>
+                <tr >
+                <td></td>
+                <td></td>
+                <td style="background: #f7f7f7;text-align: center;">Tax(GST 3%)</td>
+                <td style="background: #f7f7f7;text-align: center;" class="tax_rate"></td>
+            </tr>
+            <tr>
+            <td></td>
+            </tr>
+            <tr>
+                <tr style="background: #f7f7f7;">
+                <td colspan="3" style="color: #005272; font-size: 14px; font-weight: 600;">GRAND TOTAL</td>
+                <td class="grand_total" style="text-align: center; color: #005272; font-size: 14px; font-weight: 600;"></td>
+            </tr>
+            </tbody>
+            </table>
+        </div>
+        </div>
+    </div>  
+</div>
+<style>
+.quick_box {
+    width: 100%;
+    display: flex;
+}
+.custom_price_break{
+    padding: 30px 0;
+    padding-bottom:0;
+    display:none;
+    left: 10%;
+    z-index: 9999;
+    top: 0;
+    position: fixed;
+    width: 80%;
+    height: 80vh;
+    overflow-y: scroll;
+    background: #fff;
+    top: 10vh;
+        border-radius: 8px;
+    padding-bottom: 0;
+}
+.overlay_custom {
+    display:none;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #80808094;
+    z-index: 99;
+    top: 0;
+    left: 0;
+}
+</style>

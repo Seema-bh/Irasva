@@ -1,0 +1,358 @@
+<div class="image-with-video-overlay">
+  <div class="container">
+    {% if section.settings.spotlight_block_title != blank %}
+    <div class="widget-title{% if section.settings.title_style == 'style_2' %} not-before{% endif %}{% unless section.settings.spotlight_block_des != blank %} no-des{% endunless %}">   
+      <h3 class="box-title">
+        <span class="title"> 
+          <span>
+            {{ section.settings.spotlight_block_title }}
+          </span>
+        </span>
+      </h3>
+      {% if section.settings.spotlight_block_des != blank %}
+      <p class="banner-des">
+        {{ section.settings.spotlight_block_des }}
+      </p>        
+      {% endif %}
+      {% if section.settings.link_text1 != blank  %}
+      <a class="banner-button btn hidden-xs trigger_popup_fricc">
+        {{ section.settings.link_text1 }}<img src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/Forward_Arrow.svg?244">
+      </a>
+      {% endif %}
+    </div>
+    {% endif %}
+    <div class="first-two">
+      <div class="first_half_image col-sm-6">
+        <div class="img-box">
+          <a href="{{ section.settings.link }}" class="">
+            {% if section.settings.image != blank %}
+            <img src="//cdn.shopify.com/s/files/1/0312/7689/2298/{{ section.settings.image }}"> 
+            {% endif %}
+          </a>
+        </div>
+      </div>
+
+      <div class="second_half_video col-sm-6">
+        <div class="video-popup">
+          <button type="button" class="btn"><img src="//cdn.shopify.com/s/files/1/0312/7689/2298/{{ section.settings.image11 }}"> </button>
+          <p class="about-the-brand"><img src="https://cdn.shopify.com/s/files/1/0312/7689/2298/files/play-button.png?v=1585651178" data-toggle="modal" data-target="#size-chart"></p>
+          <!-- Size Chart Start here -->
+
+          <div class="remodal" data-remodal-id="size-chart{{product_id}}" data-remodal-options="hashTracking: false">
+            <a data-remodal-action="close" class="remodal-close"></a>
+            <div class="details-page-size-chart">
+              <div class="modal fade" id="size-chart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                    </div>
+                    <div class="modal-body">
+
+                      <iframe width="100%" data-video-id="{{ section.settings.video_link3 }}" height="100%" src="https://www.youtube.com/embed/{{ section.settings.video_link3 }}?enablejsapi=1&rel=0&autoplay=0" frameborder="0" allowfullscreen="" volume="0"></iframe>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+        </div>
+        <div class="video-title">
+          <span class="block-title">{{ section.settings.title3 }}</span>
+        </div>
+      </div> 
+    </div>
+
+    <div class="first_half_text col-sm-4">
+      <div class="img-box">
+        {% if section.settings.spotlight_block_des2 != blank %}
+        <p class="description">
+          {{ section.settings.spotlight_block_des2 }}
+        </p>        
+        {% endif %}
+        {% if section.settings.link_text1 != blank  %}
+        <a class="banner-button btn trigger_popup_fricc">
+          {{ section.settings.link_text1 }}
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="overlay_custom" style="display: block;"></div>
+    <div class="hover_bkgr_fricc">
+      <span class="helper"></span>
+      <div>
+        <h2> Customise your Jewellery</h2>
+        <div class="popupCloseButton">&times;</div>
+        <div id="contactFormWrapper">
+          <div class="identity-name flex">
+            <div class="form-group width50 marginr25">
+              <input type="text" id="contactFormName" name="contact[name]" autocapitalize="words" placeholder="Name*">
+            </div>
+            <div class="form-group width50">
+              <input type="email" name="contact[email]" id="contactFormEmail" autocorrect="off" autocapitalize="off" placeholder="Email ID*">
+            </div>
+          </div>
+
+          <div class="catagory form-group">
+            <p>Product catagory</p>
+            <input type="checkbox" id="rings" name="jwellery" value="rings">
+            <label for="rings">Rings</label>
+            <input type="checkbox" id="earrings" name="jwellery" value="earrings">
+            <label for="earrings">Earrings</label>
+            <input type="checkbox" id="pendants-necklaces" name="jwellery" value="pendants-necklaces">
+            <label for="pendants-necklaces">Pendants & Necklaces</label>
+            <input type="checkbox" id="bangles-braceltes" name="jwellery" value="bangles-braceltes">
+            <label for="Bangles & Braceltes">Bangles & Braceltes</label>
+          </div>
+
+          <div class="comment">
+            <div class="form-group">
+              <textarea rows="4" {% if form.errors contains "body" %}class="error"{% endif %} name="comment[body]" id="comment-body" placeholder="Comment">
+                {{ form.body }}
+              </textarea>
+            </div>
+          </div>
+
+          <input type="submit" class="btn" {% if settings.enable_multilang %}data-translate="contact.form.submit_contact"{%endif%} value="Submit">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $('.close').click(function () {
+    $('#size-chart').hide();
+    $('#size-chart iframe').attr("src", jQuery("#size-chart iframe").attr("src"));
+  });
+  $(window).load(function () {
+    $(".trigger_popup_fricc").click(function(){
+      $('.hover_bkgr_fricc').show();
+    });
+    $('.hover_bkgr_fricc').click(function(){
+      $('.hover_bkgr_fricc').hide();
+    });
+    $('.popupCloseButton').click(function(){
+      $('.hover_bkgr_fricc').hide();
+    });
+  });
+
+</script>
+
+
+<style>
+  .catagory p {
+    margin-bottom: 7px;
+    color: #7d7d7d;
+  }
+  .catagory label {
+    padding-right: 12px;
+  }
+
+  .catagory{
+    text-align: left;
+    width: 96.5%;
+    margin-bottom: 1em;
+    margin: auto;
+  }
+  .hover_bkgr_fricc > div textarea#comment-body {
+    max-width: 96.5%;
+  }
+  /* Popup box BEGIN */
+  .hover_bkgr_fricc{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #80808094;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+  }
+  .hover_bkgr_fricc .helper{
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+  }
+  .hover_bkgr_fricc > div {
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: 90vh;
+    min-height: 80vh;
+    vertical-align: middle;
+    width: 42%;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .popupCloseButton {
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 36px;
+    line-height: 30px;
+    width: 41px;
+    height: 50px;
+    text-align: center;
+  }
+  .hover_bkgr_fricc > div h2 {
+    font-family: "argent_cfregular";
+    color: #005272;
+    font-size: 32px;
+    letter-spacing: 1px;
+    padding: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    text-align: left;
+    padding-top: 0;
+    padding-left: 0;
+  }
+  .trigger_popup_fricc {
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+  }
+  /* Popup box END */
+
+  .video-popup {text-align: center; position: relative;}
+  .about-the-brand {
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    font-size: 30px;
+    color: #fff;
+    width: auto;
+  }
+  .about-the-brand img { 
+    padding: 4px;
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 20px;
+    transition: transform .5s;
+    cursor: pointer;
+  }
+  .about-the-brand img:hover {
+    transform: scale(1.2);
+  }
+  @media ( max-width: 767px ) {
+    input[type="checkbox"]+label {
+    padding-left: 18px;
+    margin-bottom: 9px;
+    padding-right: 5px;
+    }
+    .hover_bkgr_fricc > div {
+      width: 90%;
+    }
+    .hover_bkgr_fricc > div h2 {
+      font-size: 22px;
+    }
+    .catagory label {
+      padding-right: 4px;
+    }
+    .hover_bkgr_fricc > div {
+      height: 80vh;
+    }
+  }
+</style>
+
+{% schema %}
+{
+"name": "banner with video",
+"settings": [
+{
+"type": "select",
+"id": "title_style",
+"label": "Title Style:",
+
+"options": [
+{
+"value": "style_1",
+"label": "Style 1" 
+},
+{ 
+"value": "style_2",
+"label": "Style 2" 
+}          
+],
+"default": "style_2"
+},
+{
+"type": "text",
+"id": "spotlight_block_title",
+"label": "Title",
+"default": "#Spotlight"
+},
+{
+"type" : "textarea",
+"id" : "spotlight_block_des",
+"label" : "Description",
+"default": "Phasellus lorem malesuada ligula pulvinar commodo maecenas"
+},
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image"
+},
+{
+"type" : "textarea",
+"id" : "spotlight_block_des2",
+"label" : "Description",
+"default": "Phasellus lorem malesuada ligula pulvinar commodo maecenas"
+},
+{
+"type" : "text",
+"id" : "link_text",
+"label" : "Shop Now Text",
+"default" : "Shop Now"
+},
+{
+"type": "url",
+"id": "link",
+"label": "Link",
+"info": "Optional"
+},
+{
+"type": "image_picker",
+"id": "image11",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "video_link3",
+"label": "YouTube video ID",
+"default": "_9VUPq3SxOc",
+"info": "[Find your YouTube video ID](https://docs.joeworkman.net/rapidweaver/stacks/youtube/video-id)."
+},
+{
+"type" : "text",
+"id" : "link_text1",
+"label" : "Shop Now Text",
+"default" : "Shop Now"
+},
+{
+"type": "url",
+"id": "link1",
+"label": "Link",
+"info": "Optional"
+}
+],
+"presets": [
+{
+"name": "banner with video",
+"category": "Advanced layout"
+}
+]
+}
+{% endschema %}
+

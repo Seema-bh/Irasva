@@ -1,0 +1,290 @@
+<div class="inner product-item{% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %} pro_id_{{ product.id }}" data-product-id="product-{{ product.id }}">
+  <div class="inner-top">
+    <div class="product-top">
+      <a href="{{ product.url }}" class="product-grid-image" data-collections-related="/collections/{{collection.handle}}?view=related">
+        <div class="product-image{% if product.images.size > 1 and settings.image_swap %} image-swap{% endif %}">
+
+          {%- assign img_pr = product.featured_image.src | product_img_url: '800x' -%}
+          {%- assign img_pr_1 = product.featured_image.src | product_img_url: '300x' -%}
+          {%- assign img_pr_2 = product.featured_image.src | product_img_url: '400x' -%}
+
+          {%- assign img_0 = product.images[0].src | product_img_url: '800x' -%}
+          {%- assign img_01 = product.images[0].src | product_img_url: '300x' -%}
+          {%- assign img_02 = product.images[0].src | product_img_url: '400x' -%}
+
+          {%- assign img_1 = product.images[1].src | product_img_url: '800x' -%}
+          {%- assign img_11 = product.images[1].src | product_img_url: '300x' -%}
+          {%- assign img_12 = product.images[1].src | product_img_url: '400x' -%}
+
+          {% if product.images.size > 1 and settings.image_swap %}
+          <img alt="{{ product.images[0].alt | escape }}"
+               class="images-one lazyload"
+               data-src="{{ img_0 }}"
+               data-srcie="{{ img_01 }}"
+               data-srcief="{{ img_02 }}"
+               data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+               data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+               data-sizes="auto">
+
+          <span class="images-two">
+            <img alt="{{ product.images[1].alt | escape }}"
+                 class="lazyload"
+                 data-src="{{ img_1 }}"
+                 data-srcie="{{ img_11 }}"
+                 data-srcief="{{ img_12 }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+                 data-sizes="auto">
+
+          </span>
+          {% else %}
+          <img alt="{{ product.featured_image.alt | escape }}"
+               data-src="{{ img_pr }}"
+               data-srcie="{{ img_pr_1 }}"
+               data-srcief="{{ img_pr_2 }}"
+               class="lazyload"
+               data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+               data-aspectratio="{{ product.featured_image.aspect_ratio }}"
+               data-sizes="auto">
+          {% endif %}
+        </div>
+      </a>
+
+      {% include 'product-label' %}
+
+      {% comment %} Use for productGrid {% endcomment %}
+      <a href="{{ product.url }}" class="product-grid-image" data-collections-related="/collections/{{collection.handle}}?view=related">
+        <div class="product-des abs-center">
+          {% comment %}{% include 'wishlist-product' %}{% endcomment %}
+          {% include 'iwish_v2' with 'iwishCollection' %}
+
+          {% if settings.display_button %}
+          <div class="action">
+            {% include 'add-to-cart-form', id: 'grid-product-form-' %}          
+          </div>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+
+    {% comment %} Use for productGrid {% endcomment %}
+    <div class="product-bottom">
+      {% if settings.show_vendor %}
+      <div class="product-vendor">
+        {{ product.vendor | link_to_vendor }}
+      </div>
+      {% endif %}
+
+      <a class="product-title" href="{{ product.url }}">
+        {% include 'multilang' with product.title %}
+      </a>
+
+      <div class="price-box">
+        {% if on_sale %}
+        <div class="price-sale">
+          <span class="old-price">{{ product.variants[0].compare_at_price | money }}</span>
+          <span class="special-price">{{ product.variants[0].price | money }}</span>
+        </div>
+        {% else %}
+        <div class="price-regular">
+          <span>{{ product.variants[0].price | money | remove: '.00' }}</span>
+        </div>
+        {% endif %}
+
+      </div>
+
+      {% if settings.display_item_swatch %}
+      {% include 'item-swatch' %}
+      {% endif %}
+    </div>
+
+    {% comment %} Use for productList {% endcomment %}
+    <div class="product-details">
+      {% if settings.show_vendor %}
+      <div class="product-vendor">
+        {{ product.vendor | link_to_vendor }}
+      </div>
+      {% endif %}
+
+      <a class="product-title" href="{{ product.url }}">
+        {% include 'multilang' with product.title %}
+      </a>
+      {% comment %}
+      {% if settings.display_product_reviews %}
+      <span class="shopify-product-reviews-badge" data-id="{{ product.id }}" style="min-height: 20px; display: block; margin-bottom: 9px;"></span>
+      {% endif %}
+      {% endcomment %}
+      <div class="short-description">
+        {% if product.description contains '[countdown]' %}
+        {% assign des = product.description | split:'[/countdown]' | last %}
+        {% else %}
+        {% assign des = product.description %}
+        {% endif %}
+
+        {% if settings.enable_multilang and des contains '[lang2]' %}
+        <div class="lang1">
+          {{ des | split: '[lang2]' | first | strip_html | truncatewords: 40 }}
+        </div>
+        <div class="lang2">
+          {{ des | split: '[lang2]' | last | strip_html | truncatewords: 40 }}
+        </div>
+        {% else %}
+        <div>
+          {{ des | split: '[lang2]' | first | strip_html | truncatewords: 40 }}
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="price-box">
+        {% if on_sale %}
+        <div class="price-sale">
+          <span class="old-price">{{ product.variants[0].compare_at_price | money }}</span>
+          <span class="special-price">{{ product.variants[0].price | money }}</span>
+        </div>
+        {% else %}
+        <div class="price-regular">
+          <span>&#x20B9;{{ product.variants[0].price | money_without_currency }}</span>
+        </div>
+        {% endif %}
+        <div class="price_cal"></div> 
+      </div>
+
+      {% if settings.display_item_swatch %}
+      {% include 'item-swatch' %}
+      {% endif %}
+
+      {% if settings.display_button %}
+      <div class="action">
+        {% include 'add-to-cart-form', id: 'list-product-form' %}
+      </div>
+      {% endif %}
+
+      {% include 'wishlist-product' %}
+    </div>
+  </div>
+</div>
+{% comment %} <script>
+
+
+// console.log("check 12345 Why_not");
+$.cookie('size_ratio', '1', { expires: 1, path: '/'  });
+$.cookie('caret_ratio', '1', { expires: 1, path: '/'  });
+{% include "size_json" %}
+var json = JSON.parse(ring_size),
+    pro_id = "pro_id_{{ product.id }}";
+    var gold_price = "{{ settings.gold_price }}";
+    var weight = "{{ product.variants.first.weight_in_unit }}";
+    var diamond_caret_ratio = "{{ product.metafields.product.diamond_caret_ratio }}";
+    //console.log(pro_id," wow diamond_caret_ratio json", diamond_caret_ratio);
+
+    var cart = "{{ product.selected_variant.title }}";
+
+    if (cart == "") {
+      var cart = "{{ product.variants[0].title }}";
+    }
+var test = 'VS/SI-GH-Emerald PIE Cut-6.3x4.6';
+$.ajax({
+  type: "GET",
+  url: "https://cdn.shopify.com/s/files/1/0312/7689/2298/files/irasva.csv?v=1584391943",
+  dataType: "text",
+  success: function(data) {processData(data);}
+});
+var priceess = 0;
+
+function processData(allText) {
+  var allTextLines = allText.split(/\r\n|\n/);
+  var headers = allTextLines[0].split(',');
+  var lines = [];
+
+  for (var i=1; i<allTextLines.length; i++) {
+    var data = allTextLines[i].split(',');
+
+    var tarr = [];
+    for (var j=0; j<headers.length; j++) {
+      if( headers[j] == 'CustomType' && data[j] == test ){
+        j++;
+        var meta_d_price = data[j];
+        var gmeta_d_price = data[j];
+
+        // console.log( test ,"Success-meta_d_price",meta_d_price );
+        $.cookie('meta_d_price', meta_d_price, { expires: 1, path: '/'  });
+        $.each(json.Rings, function(i, obj) {
+          var gmeta_d_price = data[j];
+          //console.log(gmeta_d_price,"why_not gmeta_d_pricegmeta_d_pricegmeta_d_pric                 egmeta_d_price");
+          if (cart != undefined){
+            var cart1 = cart.split('/');
+            var cart1 = cart1[1];
+          }
+          if (cart1 != undefined){
+            if(cart1.indexOf(json.Rings[i].size) != -1){
+              var size_ratio = json.Rings[i].Ratio;
+              var gsize_ratio = json.Rings[i].Ratio;
+              // console.log(cart1,"ring_sizes.Rings[i].size",json.Rings[i].Ratio,"ihcksdh",size_ratio);
+              $.cookie('size_ratio', size_ratio, { expires: 1, path: '/'  });
+            }
+          }
+        });
+
+        //  $("."+pro_id+" .pr_g_price_cal").html("₹ " + parseInt(priceess));
+        //  console.log("price:---",priceess);
+
+        if (cart != undefined){
+          if (cart.indexOf("14k") != -1) { 
+            var caret_ratio = 0.58;
+            $.cookie('caret_ratio', caret_ratio, { expires: 1, path: '/'  });
+          } else if (cart.indexOf("18K") != -1) {
+            var caret_ratio = 0.75;
+            $.cookie('caret_ratio', caret_ratio, { expires: 1, path: '/'  });
+          }
+        }
+        var size_ratio = Cookies.get("size_ratio");
+        var caret_ratio = Cookies.get("caret_ratio");
+        var meta_d_price = Cookies.get("meta_d_price");
+
+        var meta_d_price =  parseInt(meta_d_price) * diamond_caret_ratio;
+        //  console.log("hahha gold_price",gold_price ,"w ", weight ,"caret ", caret_ratio ,"siz ", size_ratio ,"meta_d_price",meta_d_price);
+        if(caret_ratio != undefined && size_ratio != undefined &&  meta_d_price != undefined){
+          priceess = (gold_price * weight * caret_ratio * size_ratio) ;
+          var priceess = parseInt(priceess) + meta_d_price;
+        }else if(size_ratio != undefined && caret_ratio != undefined){
+          priceess = gold_price * weight * size_ratio * caret_ratio;
+        }else if(caret_ratio != undefined && meta_d_price != undefined){
+          priceess = gold_price * weight * caret_ratio ;
+          var priceess = parseInt(priceess) + meta_d_price;
+        }else if(size_ratio != undefined && meta_d_price != undefined){
+          priceess = gold_price * weight * size_ratio ;
+          var priceess = parseInt(priceess) + meta_d_price;
+        } else if(meta_d_price != undefined){
+          priceess = gold_price * weight ;
+          var priceess = parseInt(priceess) + meta_d_price;
+        }else if(size_ratio != undefined){
+          priceess = gold_price * weight * size_ratio;
+        }else if(caret_ratio != undefined){
+          priceess = gold_price * weight * caret_ratio;
+        }
+        else{
+          priceess = gold_price * weight ;
+        }
+        // $(".pro_id .price_cal").html("₹ " + parseInt(priceess));
+        console.log(pro_id,"₹ ",parseInt(priceess));
+        $("."+pro_id+" .pr_g_price_cal").html("₹ " + parseInt(priceess));
+        // $(".price_cal").html("₹ " + parseInt(priceess));
+
+
+        $("#"+pro_id).html("₹ " + parseInt(priceess));
+
+
+
+      }
+      // tarr.push(headers[j]+":"+data[j]);
+    }
+    //lines.push(tarr);
+  }
+  // console.log("test csv",lines);
+}
+
+
+
+
+</script> {% endcomment %}
+{% comment %} <div id="pro_id_{{ product.id }}"></div> {% endcomment %}

@@ -1,0 +1,61 @@
+<div class="page-tpl">
+<div class="container">
+{% comment %}
+{% include 'breadcrumb' %}
+{% endcomment %}
+
+<header class="page-header">
+    <h2>
+    {% include 'multilang' with page.title %}
+    </h2>      
+    <h6>(Our complementary life time maintenance service)</h6>
+</header>
+
+{% comment %}
+Regular page content goes here.
+{% endcomment %}
+<p class="italic-para">Jewellery isn’t just for a festival, a birthday or an anniversary. It’s for life and even if purchased for a special occasion, it must be worn everyday with pride. Jewellery that is well looked after will last for forever and bring joy and happiness to generations.</p>
+<p class="italic-para">At Irasva we help you keep your jewellery in pristine condition with a promise of a complementary lifetime maintenance service. Irasva’s <b>‘Forever Shining Program’</b> is a 6-monthly professional jewellery treatment program that is available to all our customers at our shops.</p>
+<p class="italic-para">The <b>‘Forever Shining’</b> Program includes:</p>
+<ul>
+<li class="italic-para">Complete cleaning and polishing</li>
+<li class="italic-para">Stone tightening</li>
+<li class="italic-para">Prong tightening</li>
+</ul>
+<br>
+<p class="italic-para" style="text-align: center;">For other chargeable repairs and services, please contact your nearest Irasva store for more details.</p>
+<div class="mobile-whatsapp">
+<div class="call-us">
+<a href="tel:1800 419 4018" class="data">
+<img src="https://www.irasva.com/skin/frontend/rwd/default/images/contact-call-icon.png">
+<br><br>Call us at 1800 419 4018
+</a>
+</div>
+<div class="whatsapp">
+<a href="tel: +91 9324140495" class="data">
+<img src="https://www.irasva.com/skin/frontend/rwd/default/images/contact-call-wapp.png">
+<br><br>+91 9324140495
+</a>
+</div>
+</div>
+<div><br>
+<h4>SHOP A WIDE RANGE OF DIAMOND JEWELLERY ONLINE</h4>
+<p class="italic-para">Look no further, as Irasva fine jewellery is here to cater to each and every diamond jewellery need you have. Select from an array of elegantly designed rings, pendants, necklaces, bracelets, bangles and earrings.</p>
+<p class="italic-para">Irasva the pure emotions of ‘Ira’ or love, forms an eternal bond with ‘Sva’, the essence of self, and gives birth to ‘Irasva’. It stands for the inseparable harmony of self-love. Irasva's gold and diamond jewellery is a confluence of two shared ideologies that the modern woman lives by. Each creation brings alive fine craftsmanship that elevates simplicity to a style statement. Whether with linear lines or intricate weaves, your passion for minimalism finds expression through Irasva's myriad diamond and gold jewellery collections.</p>
+<p class="italic-para">With Irasva’s inception began a journey that will enable you to create your own jewellery story. At Irasva’s online jewellery store you will get a melange of designer diamond and gold jewellery collections. Apart from the various unique diamond collections, we also have a diamond gifting collection consisting of diamond and gold pendants, bracelets and earrings. Jewellery is an integral part of a woman’s life. Irasva defines diamond jewellery through different collection stories, observing the distinctive qualities of a woman. Each diamond collection is inspired by a compelling story that contributes to our distinctive online jewellery shopping experience as well as the in-store experiences. Irasva does not focus on selling jewellery alone. It also engages the customer in a seamless brand experience.</p>
+<p class="italic-para">We have recently launched our flagship store that offers a sensorial experience to help customers engage with our wide array of stunning diamond jewellery. The décor resonates with our brand inspiration, with a minimal approach & elegant detailing allowing the customers to explore the ornamental jewellery collection. Designed like a contemporary temple we aim to provide an excellent in-store experience. Diamond jewellery shopping has never been more exciting.</p>
+</div>
+{% if settings.enable_multilang and page.content contains '[lang2]' %}
+<div class="rte lang1">
+    {{ page.content | split: '[lang2]' | first }}
+</div>
+<div class="rte lang2">
+    {{ page.content | split: '[lang2]' | last }}
+</div>
+{% else %}
+<div class="rte">
+    {{ page.content | split: '[lang2]' | first }}
+</div>
+{% endif %}
+</div>
+</div>
